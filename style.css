@@ -4,11 +4,23 @@ body {
 
 .card {
   background: grey;
-  height: 600px;
-  width: 600px;
+  height: 300px;
+  width: 300px;
   background-origin: center;
   background-size: cover;
   background-repeat: none;
+  border-radius: 10px;
+}
+
+.card:hover {
+  cursor: pointer;
+}
+
+.card input {
+  max-width: 90%;
+  width: 90%;
+  margin: auto;
+  display: block;
 }
 
 .plus {
