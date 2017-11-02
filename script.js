@@ -1,7 +1,9 @@
 $(function() {
   $(".card").draggable();
+  $(".card").resizable();
 
   addEvent($('.input_field'));
+  addDelete($('.x_button'));
 
   $(".plus").click(function(){
     makeCard();
@@ -19,8 +21,13 @@ $(function() {
     });
   }
 
-  function makeCard() {
+  function addDelete(target) {
+    target.click(function() {
+      target.parent().remove();
+    });
+  }
 
+  function makeCard() {
 
     // Your existing code unmodified...
     var iDiv = document.createElement('div');
@@ -33,10 +40,14 @@ $(function() {
     //console.log(innerDiv);
     //addEvent(innerDiv);
 
+    var x_button = document.createElement('div');
+    x_button.className = 'x_button';
+
     // The variable iDiv is still good... Just append to it.
     iDiv.appendChild(innerDiv);
+    iDiv.appendChild(x_button);
     $(".card").draggable();
     addEvent($('.input_field'));
+    addDelete($('.x_button'));
   };
-
 });
