@@ -27,6 +27,7 @@ $(function() {
 
     // The variable iDiv is still good... Just append to it.
     iDiv.appendChild(innerDiv);
+    $(".card").draggable();
   };
 
 });
