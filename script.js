@@ -40,6 +40,7 @@ $(function() {
     //console.log(innerDiv);
     //addEvent(innerDiv);
 
+
     var x_button = document.createElement('div');
     x_button.className = 'x_button';
 
