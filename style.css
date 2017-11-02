@@ -3,7 +3,7 @@ body {
 }
 
 .card {
-  background: grey;
+  background: #dddddd;
   height: 300px;
   width: 300px;
   background-origin: center;
@@ -11,12 +11,12 @@ body {
   background-repeat: none;
   border-radius: 10px;
   position: fixed;
-  transition: box-shadow .1s;
+  transition: box-shadow .2s ease-in-out;
 }
 
 .card:hover {
   cursor: pointer;
-  box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.1);
 }
 
 .card input {
