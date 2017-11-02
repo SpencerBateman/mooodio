@@ -1,6 +1,7 @@
 'use strict';
 
 (function() {
+    let io = require("socket.io");
 
     var socket = io();
     var canvas = $(document.body);
