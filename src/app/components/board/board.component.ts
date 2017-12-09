@@ -10,6 +10,7 @@ export class BoardComponent implements OnInit {
   isSearching: boolean;
   searchText: string;
   photos: any;
+  selectedPhotoUrl: string;
 
   constructor(private flickrService: FlickrService) { }
 
@@ -18,24 +19,23 @@ export class BoardComponent implements OnInit {
     this.photos = [];
   }
 
+  // Query flickr's api for photos
   searchPhotos() {
-    this.flickrService
-      .searchPhotos(this.searchText)
-      .subscribe(
-        (data: any) => {
-          let val = data._body;
-          val = val.replace('jsonFlickrApi(', '');
-          val = val.substring(0, val.length - 1);
-          val = JSON.parse(val);
-          this.photos = val.photos;
-        }
-      );
+    this.flickrService.searchPhotos(this.searchText).subscribe((data: any) => {
+      let val = data._body;
+      val = val.replace('jsonFlickrApi(', '');
+      val = val.substring(0, val.length - 1);
+      val = JSON.parse(val);
+      let photoList = val.photos;
+      photoList.photo = photoList.photo.slice(0, 16);
+      this.photos = photoList;
+    });
   }
 
   selectPhoto(photo) {
-    console.log(photo);
     let url = 'https://farm' + photo.farm + '.staticflickr.com/' + photo.server;
     url += '/' + photo.id + '_' + photo.secret + '_b.jpg';
+    this.selectedPhotoUrl = url;
   }
 
   enableOverlay() {
