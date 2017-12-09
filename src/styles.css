@@ -1,78 +1,43 @@
-.big-boy {
-  margin: 0 0 100px;
-  margin: auto;
+/* colors */
+
+.board {
+  margin: 1vh 0;
+  height: 90vh;
+  background: #efefef;
 }
 
-.salb-vcenter {
+.board__name {
+  background: #e5e5e5;
   display: inline-block;
-  vertical-align: middle;
-  float: none;
+  padding: 10px 20px;
 }
 
-.salb-white {
-  color: white;
-}
-
-
-.salb-glyphicon {
-  font-size: 30px;
-  margin: 15px 0;
-}
-
-.salb-padder {
-  margin: 20px 0;
-}
-
-.salb-blue {
-  color: #377BB5;
-}
-
-.salb-bg-grey {
-  background: #F8F8F8;
-}
-
-.salb-widget {
-  display: block;
-  position: relative;
-}
-
-.salb-widget img {
-  width: 100%;
-}
-
-.salb-widget__box {
-  width: 30px;
-  background: white;
+.searchOverlay {
+  position: fixed;
   top: 0;
-  right: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: block;
   z-index: 10;
-  position: absolute;
 }
 
-.salb-widget__box span {
-  font-size: 10px;
+.flickr-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  opacity: .3;
+  height: 100%;
+  width: 100%;
+  display: block;
+  background: black;
+  z-index: 1;
 }
 
-a span {
-  color: white;
-}
-
-.salb-dark {
-  color: #333333;
-}
-
-button {
-  margin: 10px 0;
-}
-
-input {
-  margin: 10px 0;
-}
-
-.salb-clickable:hover {
-  cursor: pointer;
-}
-
-.salb-padding {
-  height: 100px;
+.flickr-box {
+  background: white;
+  width: 100%;
+  height: 80vh;
+  z-index: 2;
+  position: relative;
 }

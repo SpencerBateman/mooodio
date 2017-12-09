@@ -12,6 +12,7 @@ import { UserService } from './services/user.service.client';
 import { AuthenticationService } from './services/authentication.service.client';
 import { SharedService } from './services/shared.service.client';
 import { BoardComponent } from './components/board/board.component';
+import { FlickrService } from './services/flickr.service.client';
 
 
 @NgModule({
@@ -31,7 +32,7 @@ import { BoardComponent } from './components/board/board.component';
     Routing
   ],
   // Client Side services here
-  providers: [ UserService, SharedService, AuthenticationService],
+  providers: [ UserService, SharedService, AuthenticationService, FlickrService],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
