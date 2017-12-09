@@ -16,53 +16,12 @@ module.exports = function(app) {
   app.put('/api/user/:userId', updateUser);
   app.post('/api/user', createUser);
 
-  app.get ('/facebook/login', passport.authenticate('facebook', { scope : 'email' }));
-  app.get ('/facebook/oauth2callback', passport.authenticate('facebook', {
-    successRedirect: 'http://localhost:4200/profile',
-    failureRedirect: 'http://localhost:4200/login'
-  }));
-
   let LocalStrategy = require('passport-local').Strategy;
-  let FacebookStrategy = require('passport-facebook').Strategy;
-
   passport.use(new LocalStrategy(localStrategy));
 
   function logout(req, res) {
     req.logOut();
     res.send(200);
-  }
-
-  var facebookConfig = {
-    clientID     : process.env.FACEBOOK_CLIENT_ID,
-    clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
-    callbackURL  : process.env.FACEBOOK_CALLBACK_URL
-  };
-
-  passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
-
-  function facebookStrategy(token, refreshToken, profile, done) {
-    userModel
-      .findUserByFacebookId(profile.id)
-      .then(function(user) {
-        if (user) {
-          return done(null, user);
-        } else {
-          let names = profile.displayName.split(" ");
-          let newFacebookUser = {
-            lastName:  names[1],
-            firstName: names[0],
-            email:     profile.emails ? profile.emails[0].value:"",
-            facebook: {
-              id:    profile.id,
-              token: token
-            }
-          };
-          return userModel.createUser(newFacebookUser);
-        }
-      })
-      .then(function(user) {
-        return done(null, user);
-      });
   }
 
   function loggedIn(req, res) {
