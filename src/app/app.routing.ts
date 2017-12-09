@@ -8,10 +8,9 @@ import { AuthenticationService } from './services/authentication.service.client'
 import { BoardComponent } from './components/board/board.component';
 
 const APP_ROUTES: Routes = [
-  {path: '', component : BoardComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'board', component: BoardComponent},
+  {path: 'board/:boardId', component: BoardComponent},
   {path: 'profile', component: ProfileComponent, canActivate: [AuthenticationService]}
 ];
 

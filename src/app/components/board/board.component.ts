@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FlickrService } from '../../services/flickr.service.client';
+import { ImageService } from '../../services/image/image.service';
 
 @Component({
   selector: 'app-board',
@@ -10,13 +11,14 @@ export class BoardComponent implements OnInit {
   isSearching: boolean;
   searchText: string;
   photos: any;
-  selectedPhotoUrl: string;
+  boardId: string;
 
-  constructor(private flickrService: FlickrService) { }
+  constructor(private flickrService: FlickrService, private imageService: ImageService) { }
 
   ngOnInit() {
     this.isSearching = false;
     this.photos = [];
+    this.boardId = '';
   }
 
   // Query flickr's api for photos
@@ -35,7 +37,10 @@ export class BoardComponent implements OnInit {
   selectPhoto(photo) {
     let url = 'https://farm' + photo.farm + '.staticflickr.com/' + photo.server;
     url += '/' + photo.id + '_' + photo.secret + '_b.jpg';
-    this.selectedPhotoUrl = url;
+    let tempImage = {left: 0, top: 0, url: url};
+    this.imageService.createImage(this.boardId, tempImage).subscribe((res: any) => {
+      this.isSearching = false;
+    });
   }
 
   enableOverlay() {
