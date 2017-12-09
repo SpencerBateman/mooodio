@@ -11,6 +11,7 @@ import { ProfileComponent } from './components/user/profile/profile.component';
 import { UserService } from './services/user.service.client';
 import { AuthenticationService } from './services/authentication.service.client';
 import { SharedService } from './services/shared.service.client';
+import { BoardComponent } from './components/board/board.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { SharedService } from './services/shared.service.client';
     HomeComponent,
     LoginComponent,
     RegisterComponent,
-    ProfileComponent
+    ProfileComponent,
+    BoardComponent
   ],
   imports: [
     BrowserModule,
