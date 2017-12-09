@@ -5,5 +5,6 @@ module.exports = function (app) {
   require('./services/page.service.server.js')(app);
   require('./services/widget.service.server.js')(app);
   require('./services/board.service.server.js')(app);
+  require('./services/image.service.server.js')(app);
 };
 
