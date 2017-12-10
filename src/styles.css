@@ -16,6 +16,7 @@
 .board__photo {
   display: inline-block;
 }
+
 .board__photo img {
   max-width: 200px;
   max-height: 200px;
@@ -49,4 +50,10 @@
   height: 80vh;
   z-index: 2;
   position: relative;
+}
+
+.navbar-image {
+  max-width: 50%;
+  margin: auto;
+  display: block;
 }
