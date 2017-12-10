@@ -25,6 +25,7 @@
   <div class='board' id='board'>
     <div class='board__name'>
       <h2>{{board['name']}}</h2>
+      <i class="fa fa-edit fa-2x pull-right"></i>
     </div>
     <div *ngFor="let photo of photos" draggable [ngStyle]="{'left': photo.left, 'top': photo.top}" (newPosition)="savePosition($event)" class='board__photo' data-id='{{photo._id}}'>
       <img src={{photo.url}}>

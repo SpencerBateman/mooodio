@@ -9,8 +9,15 @@
 
 .board__name {
   background: #e5e5e5;
-  display: inline-block;
+  display: block;
   padding: 10px 20px;
+}
+
+.board__name h2 {
+  display: inline-block;
+}
+.board__name {
+  display: inline-block;
 }
 
 .board__photo {

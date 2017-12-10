@@ -1,13 +1,11 @@
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
-
     <!--heading on the nav bar-->
     <p class="navbar-header pull-left">
       <a class="navbar-brand thick">
         <b>Profile</b>
       </a>
     </p>
-
     <!--tick mark-->
     <p class="navbar-text pull-right">
       <a (click)="updateProfile()" class="navbar-link">
@@ -16,7 +14,6 @@
     </p>
   </div>
 </nav>
-
 <div class="container">
   <div class="row">
     <label for="username">Username</label>
@@ -48,6 +45,11 @@
            placeholder="Wonderland">
     <a class="btn btn-primary btn-block"
        (click)="createBoardAndNavigate()">Create Board</a>
+     <ul class="container">
+       <li class='board__preview' *ngFor="let board of boards" [routerLink]="['/board/', board._id]">
+         <h3>{{board.name}}</h3>
+       </li>
+     </ul>
     <a class="btn btn-danger btn-block "
        (click)="logout()" >Logout</a>
   </div>

@@ -14,6 +14,7 @@ export class ProfileComponent implements OnInit {
   // properties
   userId: string;
   user = {};
+  boards: any;
 
   constructor(
     private userService: UserService,
@@ -29,6 +30,9 @@ export class ProfileComponent implements OnInit {
         (params: any) => {
           this.user = this.sharedService.user || {};
           this.userId = this.user['_id'];
+          this.boardService.findBoardsByUser(this.userId).subscribe((boards) => {
+            this.boards = boards;
+          });
         }
       );
   }
