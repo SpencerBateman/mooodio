@@ -4,9 +4,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {SharedService} from '../../../services/shared.service.client';
 
 @Component({
-    selector: 'app-profile',
-    templateUrl: './profile.component.html',
-    styleUrls: ['./profile.component.css']
+    selector: 'app-view-profile',
+    templateUrl: './view-profile.component.html',
+    styleUrls: ['./view-profile.component.css']
 })
 export class ViewProfileComponent implements OnInit {
     // properties
