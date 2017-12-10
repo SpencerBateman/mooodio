@@ -54,6 +54,12 @@ export class BoardService {
         }
       );
   }
+
+  getRandomBoardCollection() {
+    return this._http.get(this.baseUrl + '/api/board/all').map((res: Response) => {
+      return res.json();
+    });
+  }
 }
 
 
