@@ -16,6 +16,7 @@ import { FlickrService } from './services/flickr.service.client';
 import { BoardService } from './services/board/board.service';
 import { ImageService } from './services/image/image.service';
 import { DraggableDirective } from './directives/draggable.directive';
+import { ViewProfileComponent } from './components/user/view-profile/view-profile.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { DraggableDirective } from './directives/draggable.directive';
     RegisterComponent,
     ProfileComponent,
     BoardComponent,
-    DraggableDirective
+    DraggableDirective,
+    ViewProfileComponent
   ],
   imports: [
     BrowserModule,
