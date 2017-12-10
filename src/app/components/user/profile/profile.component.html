@@ -52,6 +52,9 @@
      </ul>
     <a class="btn btn-danger btn-block "
        (click)="logout()" >Logout</a>
+    <a [routerLink]="['/profile/5a2cc2cab32d48162895f12a']">
+      GO TO PROFILE
+    </a>
     <p>Following: {{user['following']}}</p>
     <p>FollowedBy: {{user['followedBy']}}</p>
   </div>
