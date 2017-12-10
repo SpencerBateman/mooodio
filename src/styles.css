@@ -3,6 +3,7 @@
 .board {
   margin: 1vh 0;
   height: 90vh;
+  width: 100%;
   background: #efefef;
 }
 
@@ -10,6 +11,14 @@
   background: #e5e5e5;
   display: inline-block;
   padding: 10px 20px;
+}
+
+.board__photo {
+  display: inline-block;
+}
+.board__photo img {
+  max-width: 200px;
+  max-height: 200px;
 }
 
 .searchOverlay {

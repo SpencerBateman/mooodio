@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { FlickrService } from '../../services/flickr.service.client';
 import { ImageService } from '../../services/image/image.service';
-import {ActivatedRoute} from '@angular/router';
-import {BoardService} from '../../services/board/board.service';
+import { BoardService } from '../../services/board/board.service';
+declare var jquery:any;
+declare var $ :any;
 
 @Component({
   selector: 'app-board',
@@ -69,5 +71,16 @@ export class BoardComponent implements OnInit {
 
   disableOverlay() {
     this.isSearching = false;
+  }
+
+  savePosition(posObject) {
+    let id = posObject.id;
+    let position = posObject.pos;
+    this.imageService.findImageById(id).subscribe((image: any) => {
+      image.top = position.top;
+      image.left = position.left;
+      this.imageService.updateImage(id, image).subscribe((res: any) => {
+      });
+    });
   }
 }
