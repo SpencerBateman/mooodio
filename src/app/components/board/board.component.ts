@@ -13,6 +13,7 @@ export class BoardComponent implements OnInit {
   isSearching: boolean;
   searchText: string;
   photos: [{}];
+  flickrPhotos: [{}];
   boardId: string;
   board: {};
 
@@ -43,7 +44,7 @@ export class BoardComponent implements OnInit {
       val = JSON.parse(val);
       const photoList = val.photos;
       photoList.photo = photoList.photo.slice(0, 16);
-      this.photos = photoList;
+      this.flickrPhotos = photoList;
     });
   }
 
