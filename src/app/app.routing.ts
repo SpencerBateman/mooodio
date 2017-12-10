@@ -8,6 +8,7 @@ import { AuthenticationService } from './services/authentication.service.client'
 import { BoardComponent } from './components/board/board.component';
 
 const APP_ROUTES: Routes = [
+  {path: '', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'board/:boardId', component: BoardComponent},
