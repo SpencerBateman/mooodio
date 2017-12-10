@@ -25,7 +25,7 @@ export class UserService {
                 (res: Response) => {
                     const user = res.json();
                     if (user !== 0) {
-                        this.sharedService.user = user; // setting user so as to share with all components
+                        this.sharedService.user = user; // setting viewedUser so as to share with all components
                         return true;
                     } else {
                         this.router.navigate(['/login']);
@@ -71,7 +71,7 @@ export class UserService {
 
 
     createUser(user: any) {
-        return this._http.post(this.baseUrl + '/api/user',
+        return this._http.post(this.baseUrl + '/api/viewedUser',
             user)
             .map(
                 (res: Response) => {
@@ -81,7 +81,7 @@ export class UserService {
     }
 
     findUserByUsername(username: string) {
-        return this._http.get(this.baseUrl + '/api/user?username=' + username)
+        return this._http.get(this.baseUrl + '/api/viewedUser?username=' + username)
             .map(
                 (res: Response) => {
                     return res.json();
@@ -90,7 +90,7 @@ export class UserService {
     }
 
     findUserByCredentials(username: string, password: string) {
-        return this._http.get(this.baseUrl + '/api/user?username=' + username + '&password=' + password)
+        return this._http.get(this.baseUrl + '/api/viewedUser?username=' + username + '&password=' + password)
             .map(
                 (res: Response) => {
                     return res.json();
@@ -99,7 +99,7 @@ export class UserService {
     }
 
     findUserById(userId: string) {
-        return this._http.get(this.baseUrl + '/api/user/' + userId)
+        return this._http.get(this.baseUrl + '/api/viewedUser/' + userId)
             .map(
                 (res: Response) => {
                     return res.json();
@@ -108,7 +108,7 @@ export class UserService {
     }
 
     updateUser(userId: string, user: any) {
-        return this._http.put(this.baseUrl + '/api/user/' + userId,
+        return this._http.put(this.baseUrl + '/api/viewedUser/' + userId,
             user)
             .map(
                 (res: Response) => {
@@ -118,7 +118,7 @@ export class UserService {
     }
 
     deleteUser(userId: string) {
-        return this._http.delete(this.baseUrl + '/api/user/' + userId)
+        return this._http.delete(this.baseUrl + '/api/viewedUser/' + userId)
             .map(
                 (res: Response) => {
                     return !res.json();

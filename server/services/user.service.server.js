@@ -11,10 +11,10 @@ module.exports = function(app) {
   app.post('/api/register', register);
   app.post('/api/logout', logout);
 
-  app.get('/api/user', findAllUser);
-  app.get('/api/user/:userId', findUserById);
-  app.put('/api/user/:userId', updateUser);
-  app.post('/api/user', createUser);
+  app.get('/api/viewedUser', findAllUser);
+  app.get('/api/viewedUser/:userId', findUserById);
+  app.put('/api/viewedUser/:userId', updateUser);
+  app.post('/api/viewedUser', createUser);
 
   let LocalStrategy = require('passport-local').Strategy;
   passport.use(new LocalStrategy(localStrategy));
