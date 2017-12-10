@@ -8,15 +8,16 @@ import {SharedService} from '../../../services/shared.service.client';
     templateUrl: './profile.component.html',
     styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent implements OnInit {
+export class ViewProfileComponent implements OnInit {
     // properties
-    userId: string;
+    activeUser: {};
+    viewedUserId: string;
     user = {};
+    following: Boolean =  false;
 
     constructor(
         private userService: UserService,
         private activatedRoute: ActivatedRoute,
-        private router: Router,
         private sharedService: SharedService) { }
 
     ngOnInit() {
@@ -24,30 +25,26 @@ export class ProfileComponent implements OnInit {
         this.activatedRoute.params
             .subscribe(
                 (params: any) => {
-                    this.user = this.sharedService.user || {};
-                    this.userId = this.user['_id'];
+                  this.viewedUserId = params['viewedUserId'];
+                  this.activeUser = this.sharedService.user || {};
+                  this.userService.findUserById(this.viewedUserId).subscribe((user: any) => {
+                    this.user = user;
+                  });
                 }
             );
     }
 
-    updateProfile(navigate: boolean) {
-        this.userService.updateUser(this.userId, this.user).subscribe(
-            (data: any) => {
-                if (navigate) {
-                    this.router.navigate(['/user/' + data._id + '/website']);
-                }
-            }
-        );
+    follow() {
+      this.user['followedBy'].push(this.activeUser['_id']);
+      this.userService.updateUser(this.viewedUserId, this.user).subscribe((user: any) => {
+        this.activeUser['following'].push(this.viewedUserId);
+        this.userService.updateUser(this.activeUser['_id'], this.activeUser).subscribe((thirdUser: any) => {
+          this.following = true;
+        });
+      });
     }
+    // have the active user followed the viewed user
 
-    logout() {
-        this.userService.logout()
-            .subscribe(
-                (data: any) => {
-                    this.router.navigate(['/login']);
-                }
-            );
-    }
 
 }
 
