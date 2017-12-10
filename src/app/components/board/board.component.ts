@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FlickrService } from '../../services/flickr.service.client';
 import { ImageService } from '../../services/image/image.service';
+import {ActivatedRoute} from '@angular/router';
+import {BoardService} from '../../services/board/board.service';
 
 @Component({
   selector: 'app-board',
@@ -10,15 +12,26 @@ import { ImageService } from '../../services/image/image.service';
 export class BoardComponent implements OnInit {
   isSearching: boolean;
   searchText: string;
-  photos: any;
+  photos: [{}];
   boardId: string;
+  board: {};
 
-  constructor(private flickrService: FlickrService, private imageService: ImageService) { }
+  constructor(private flickrService: FlickrService,
+              private imageService: ImageService,
+              private activatedRoute: ActivatedRoute,
+              private boardService: BoardService) { }
 
   ngOnInit() {
     this.isSearching = false;
-    this.photos = [];
-    this.boardId = '';
+    this.activatedRoute.params.subscribe((params: any) => {
+      this.boardId = params['boardId'];
+      this.boardService.findBoardById(this.boardId).subscribe((board: any) => {
+        this.board = board;
+      });
+      this.imageService.findImagesByBoardId(this.boardId).subscribe((images: any) => {
+        this.photos = images;
+      });
+    });
   }
 
   // Query flickr's api for photos
@@ -28,7 +41,7 @@ export class BoardComponent implements OnInit {
       val = val.replace('jsonFlickrApi(', '');
       val = val.substring(0, val.length - 1);
       val = JSON.parse(val);
-      let photoList = val.photos;
+      const photoList = val.photos;
       photoList.photo = photoList.photo.slice(0, 16);
       this.photos = photoList;
     });
@@ -37,9 +50,15 @@ export class BoardComponent implements OnInit {
   selectPhoto(photo) {
     let url = 'https://farm' + photo.farm + '.staticflickr.com/' + photo.server;
     url += '/' + photo.id + '_' + photo.secret + '_b.jpg';
-    let tempImage = {left: 0, top: 0, url: url};
+    const tempImage = {left: 0, top: 0, url: url};
     this.imageService.createImage(this.boardId, tempImage).subscribe((res: any) => {
-      this.isSearching = false;
+      this.boardService.findBoardById(this.boardId).subscribe((board: any) => {
+        this.board = board;
+      });
+      this.imageService.findImagesByBoardId(this.boardId).subscribe((images: any) => {
+        this.photos = images;
+        this.disableOverlay();
+      });
     });
   }
 

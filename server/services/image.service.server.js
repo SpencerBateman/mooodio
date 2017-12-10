@@ -1,7 +1,7 @@
 module.exports = function(app) {
 
     let imageModel = require('../model/image/image.model.server');
-    let boardModel = require('../model/board/board.model.schema');
+    let boardModel = require('../model/board/board.model.server');
 
     let multer = require('multer'); // npm install multer --save
     let upload = multer({ dest: __dirname+'/../../src/assets/uploads' });

@@ -22,7 +22,8 @@
   </div>
   <div class='board'>
     <div class='board__name'>
-      <h2>This is my name</h2>
+      <h2>{{board['name']}}</h2>
+      <p>{{photos.length}}</p>
     </div>
   </div>
   <button (click)="enableOverlay()" class='btn btn-primary btn-block'>Search Flickr</button>
