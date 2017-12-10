@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../../services/user.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
 import {SharedService} from '../../../services/shared.service.client';
+import { BoardService } from '../../../services/board/board.service';
 
 @Component({
   selector: 'app-profile',
@@ -9,12 +10,14 @@ import {SharedService} from '../../../services/shared.service.client';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+
   // properties
   userId: string;
   user = {};
 
   constructor(
     private userService: UserService,
+    private boardService: BoardService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private sharedService: SharedService) { }
@@ -30,14 +33,17 @@ export class ProfileComponent implements OnInit {
       );
   }
 
-  updateProfile(navigate: boolean) {
-    this.userService.updateUser(this.userId, this.user).subscribe(
-      (data: any) => {
-        if (navigate) {
-          this.router.navigate(['/user/' + data._id + '/website']);
-        }
-      }
-    );
+  updateProfile() {
+    this.userService.updateUser(this.userId, this.user).subscribe((data: any) => {
+    });
+  }
+
+  createBoardAndNavigate() {
+    this.userService.updateUser(this.userId, this.user).subscribe((data: any) => {
+      this.boardService.createBoard(this.userId).subscribe((board) => {
+        this.router.navigate(['/board/' + board._id]);
+      });
+    });
   }
 
   logout() {

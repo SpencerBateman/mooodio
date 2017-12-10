@@ -9,8 +9,8 @@ export class BoardService {
 
   baseUrl = environment.baseUrl;
 
-  createBoard(userId: string, board: any) {
-    return this._http.post(this.baseUrl + '/api/user/' + userId + '/board', board)
+  createBoard(userId: string) {
+    return this._http.post(this.baseUrl + '/api/user/' + userId + '/board', '')
       .map(
         (res: Response) => {
           return res.json();

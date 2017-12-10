@@ -1,16 +1,24 @@
 <div class="container">
-  <div *ngIf="errorFlag"
-    class="alert alert-danger">
-    Please fill out all fields. All Fields are required
+  <nav class="navbar navbar-default">
+    <div class="navbar-header">
+      <img class='navbar-image' src='/assets/images/logo.png'>
+    </div>
+  </nav>
+  <hr/>
+  <div class='login__container'>
+    <div *ngIf="errorFlag"
+      class="alert alert-danger">
+      Please fill out all fields. All Fields are required
+    </div>
+    <h1>Register</h1>
+    <form (ngSubmit) = "register()" #f="ngForm">
+      <input name='username' [(ngModel)]='username' type='text' class='form-control' placeholder='Please Enter A Username'>
+      <input name='firstName' [(ngModel)]='firstName' type='text' class='form-control' placeholder='Please Enter Your First Name'>
+      <input name='lastName' [(ngModel)]='lastName' type='text' class='form-control' placeholder='Please Enter Your Last Name'>
+      <input name='password' [(ngModel)]='password' type='password' class='form-control' placeholder='Please Enter A Password'>
+      <input name='conf_password' [(ngModel)]='conf_password' type='password' class='form-control' placeholder='Verify Baby!'>
+      <button type='submit' class='btn btn-primary btn-block'>Register</button>
+    </form>
+    <a [routerLink]="['/login']"><button type='button' class='btn btn-danger btn-block'>Cancel</button></a>
   </div>
-  <h1>Register</h1>
-  <form (ngSubmit) = "register()" #f="ngForm">
-    <input name='username' [(ngModel)]='username' type='text' class='form-control' placeholder='Please Enter A Username'>
-    <input name='firstName' [(ngModel)]='firstName' type='text' class='form-control' placeholder='Please Enter Your First Name'>
-    <input name='lastName' [(ngModel)]='lastName' type='text' class='form-control' placeholder='Please Enter Your Last Name'>
-    <input name='password' [(ngModel)]='password' type='password' class='form-control' placeholder='Please Enter A Password'>
-    <input name='conf_password' [(ngModel)]='conf_password' type='password' class='form-control' placeholder='Verify Baby!'>
-    <button type='submit' class='btn btn-primary btn-block'>Register</button>
-  </form>
-  <a [routerLink]="['/login']"><button type='button' class='btn btn-danger btn-block'>Cancel</button></a>
 </div>
