@@ -77,14 +77,13 @@ module.exports = function(app) {
   }
 
   function updateUser(req, res) {
-    var user = req.body;
-    var userId = req.params['userId'];
-
-    userModel
-      .updateUser(userId, user)
-      .then(function(user) {
-        res.json(user);
+    let userId = req.params['userId'];
+    let user = req.body;
+    userModel.updateUser(userId, user).then(function(oldUser) {
+      userModel.findUserById(userId).then(function (user) {
+        res.json(user)
       });
+    });
   }
 
   function findUserById(req, res) {
