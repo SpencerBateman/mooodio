@@ -18,14 +18,16 @@ export class BoardComponent implements OnInit {
   flickrPhotos: [{}];
   boardId: string;
   board: {};
+  editingName: boolean;
 
   constructor(private flickrService: FlickrService,
-              private imageService: ImageService,
-              private activatedRoute: ActivatedRoute,
-              private boardService: BoardService) { }
+    private imageService: ImageService,
+    private activatedRoute: ActivatedRoute,
+    private boardService: BoardService) { }
 
   ngOnInit() {
     this.isSearching = false;
+    this.editingName = false;
     this.activatedRoute.params.subscribe((params: any) => {
       this.boardId = params['boardId'];
       this.boardService.findBoardById(this.boardId).subscribe((board: any) => {
@@ -36,6 +38,17 @@ export class BoardComponent implements OnInit {
       });
     });
   }
+
+  editName() {
+    this.editingName = true;
+  }
+
+  saveName() {
+    this.boardService.updateBoard(this.boardId, this.board).subscribe(() => {
+      this.editingName = false;
+    });
+  }
+
 
   // Query flickr's api for photos
   searchPhotos() {
