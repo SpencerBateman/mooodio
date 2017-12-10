@@ -13,13 +13,15 @@
 
 <div class="container-fluid zlr-main-content-container">
   <div class="row">
-    <p>Username: {{user['username']}}</p>
-    <p>First name: {{user['firstName']}}</p>
-    <p>Last name: {{user['lastName']}}</p>
-    <p>Following: {{user['following']}}</p>
-    <p>Followed by: {{user['followedBy']}}</p>
-    <a class="btn btn-primary btn-block"
+    <p>Username: {{viewedUser['username']}}</p>
+    <p>First name: {{viewedUser['firstName']}}</p>
+    <p>Last name: {{viewedUser['lastName']}}</p>
+    <p>Following: {{viewedUser['following']}}</p>
+    <p>Followed by: {{viewedUser['followedBy']}}</p>
+    <a *ngIf="!following" class="btn btn-primary btn-block"
        (click)="follow()">Follow</a>
+    <a *ngIf="following" class="btn btn-primary btn-block"
+       (click)="unfollow()">Unfollow</a>
   </div>
 </div>
 <!-- Footer -->

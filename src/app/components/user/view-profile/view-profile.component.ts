@@ -12,7 +12,7 @@ export class ViewProfileComponent implements OnInit {
     // properties
     activeUser: {};
     viewedUserId: string;
-    user = {};
+    viewedUser = {};
     following: Boolean =  false;
 
     constructor(
@@ -28,23 +28,32 @@ export class ViewProfileComponent implements OnInit {
                   this.viewedUserId = params['viewedUserId'];
                   this.activeUser = this.sharedService.user || {};
                   this.userService.findUserById(this.viewedUserId).subscribe((user: any) => {
-                    this.user = user;
+                    this.viewedUser = user;
                   });
                 }
             );
     }
 
     follow() {
-      this.user['followedBy'].push(this.activeUser['_id']);
-      this.userService.updateUser(this.viewedUserId, this.user).subscribe((user: any) => {
+      this.viewedUser['followedBy'].push(this.activeUser['_id']);
+      this.userService.updateUser(this.viewedUserId, this.viewedUser).subscribe((user: any) => {
         this.activeUser['following'].push(this.viewedUserId);
         this.userService.updateUser(this.activeUser['_id'], this.activeUser).subscribe((thirdUser: any) => {
           this.following = true;
         });
       });
     }
-    // have the active user followed the viewed user
 
-
+    unfollow() {
+        const userfollowedBy = this.viewedUser['followedBy'];
+        userfollowedBy.splice(userfollowedBy.indexOf(this.activeUser['_id']), 1);
+        this.userService.updateUser(this.viewedUserId, this.viewedUser).subscribe((user: any) => {
+            const userFollowing = this.activeUser['following'];
+            userFollowing.splice(userFollowing.indexOf(this.viewedUserId), 1);
+            this.userService.updateUser(this.activeUser['_id'], this.activeUser).subscribe((thirdUser: any) => {
+                this.following = false;
+            });
+        });
+    }
 }
 

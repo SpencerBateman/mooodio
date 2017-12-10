@@ -25,12 +25,7 @@ module.exports = function(app) {
   }
 
   function loggedIn(req, res) {
-    console.log(req.isAuthenticated());
-    if (req.isAuthenticated()) {
-      res.json(req.user);
-    } else {
-      res.send('0');
-    }
+    res.send(req.isAuthenticated() ? req.user : '0');
   }
 
   function localStrategy(usrn, pass, done) {
