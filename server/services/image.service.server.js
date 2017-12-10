@@ -96,7 +96,7 @@ module.exports = function(app) {
         let websiteId = req.body.websiteId;
         let boardId = req.body.boardId;
 
-        let originalname  = myFile.originalname; // file name on viewedUser's computer
+        let originalname  = myFile.originalname; // file name on user's computer
         let filename      = myFile.filename;     // new file name in upload folder
         let path          = myFile.path;         // full path of uploaded file
         let destination   = myFile.destination;  // folder where file is saved to
@@ -106,7 +106,7 @@ module.exports = function(app) {
         imageModel.findImageById(imageId).then(function(image) {
             image.url = '/assets/uploads/'+filename;
             image.save().then(function (image) {
-                let callbackUrl   = frontEndUrl + '/viewedUser/'+userId+'/website/'+websiteId+'/board/'+boardId+'/image';
+                let callbackUrl   = frontEndUrl + '/user/'+userId+'/website/'+websiteId+'/board/'+boardId+'/image';
                 res.redirect(callbackUrl);
             })
         });

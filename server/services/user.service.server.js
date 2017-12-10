@@ -11,10 +11,10 @@ module.exports = function(app) {
   app.post('/api/register', register);
   app.post('/api/logout', logout);
 
-  app.get('/api/viewedUser', findAllUser);
-  app.get('/api/viewedUser/:userId', findUserById);
-  app.put('/api/viewedUser/:userId', updateUser);
-  app.post('/api/viewedUser', createUser);
+  app.get('/api/user', findAllUser);
+  app.get('/api/user/:userId', findUserById);
+  app.put('/api/user/:userId', updateUser);
+  app.post('/api/user', createUser);
 
   let LocalStrategy = require('passport-local').Strategy;
   passport.use(new LocalStrategy(localStrategy));
@@ -25,12 +25,7 @@ module.exports = function(app) {
   }
 
   function loggedIn(req, res) {
-    console.log(req.isAuthenticated());
-    if (req.isAuthenticated()) {
-      res.json(req.user);
-    } else {
-      res.send('0');
-    }
+    res.send(req.isAuthenticated() ? req.user : '0');
   }
 
   function localStrategy(usrn, pass, done) {

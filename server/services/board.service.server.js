@@ -10,8 +10,8 @@ module.exports = function(app) {
         'deleteBoard'       : this.deleteBoard
     };
 
-    app.post('/api/viewedUser/:userId/board', createBoard);
-    app.get('/api/viewedUser/:userId/board', findAllBoardsForUser);
+    app.post('/api/user/:userId/board', createBoard);
+    app.get('/api/user/:userId/board', findAllBoardsForUser);
     app.get('/api/board/:boardId', findBoardById);
     app.put('/api/board/:boardId', updateBoard);
     app.delete('/api/board/:boardId', deleteBoard);
