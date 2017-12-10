@@ -63,6 +63,7 @@ module.exports = function(app) {
   }
 
   function getAllBoards(req, res) {
+    console.log('hello');
     console.log(req);
     boardModel.sample().then((sample) => {
       res.json(sample);
