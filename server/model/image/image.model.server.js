@@ -2,7 +2,7 @@ let mongoose = require('mongoose');
 let ImageSchema = require('./image.schema.server');
 let ImageModel = mongoose.model("ImageModel", ImageSchema);
 
-let BoardModel = require('../board/board.model.schema');
+let BoardModel = require('../board/board.model.server');
 
 ImageModel.createImageForBoard      = createImageForBoard;
 ImageModel.findImageById           = findImageById;
