@@ -16,9 +16,6 @@
 .board__name h2 {
   display: inline-block;
 }
-.board__name {
-  display: inline-block;
-}
 
 .board__photo {
   display: inline-block;
