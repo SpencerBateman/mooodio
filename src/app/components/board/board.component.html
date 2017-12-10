@@ -23,7 +23,9 @@
   <div class='board'>
     <div class='board__name'>
       <h2>{{board['name']}}</h2>
-      <p>{{photos.length}}</p>
+      <div *ngFor="let photo in photos" class='board__photo'>
+        <img src='photo.url'>
+      </div>
     </div>
   </div>
   <button (click)="enableOverlay()" class='btn btn-primary btn-block'>Search Flickr</button>
