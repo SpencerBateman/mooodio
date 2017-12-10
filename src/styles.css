@@ -57,3 +57,11 @@
   margin: auto;
   display: block;
 }
+
+.login__container {
+  max-width: 500px;
+  margin: auto;
+  background: #efefef;
+  padding: 25px 50px 50px;
+  border-radius: 10px;
+}
