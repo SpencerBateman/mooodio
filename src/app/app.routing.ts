@@ -7,6 +7,7 @@ import { RegisterComponent } from './components/user/register/register.component
 import { AuthenticationService } from './services/authentication.service.client';
 import { BoardComponent } from './components/board/board.component';
 import {ViewProfileComponent} from './components/user/view-profile/view-profile.component';
+import {SearchUsersComponent} from './components/search-users/search-users.component';
 
 const APP_ROUTES: Routes = [
   {path: '', component: HomeComponent},
@@ -14,7 +15,8 @@ const APP_ROUTES: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'board/:boardId', component: BoardComponent},
   {path: 'profile', component: ProfileComponent, canActivate: [AuthenticationService]},
-  {path: 'profile/:viewedUserId', component: ViewProfileComponent}
+  {path: 'profile/:viewedUserId', component: ViewProfileComponent},
+  {path: 'searchUsers', component: SearchUsersComponent}
 ];
 
 // Export the routes as module providers

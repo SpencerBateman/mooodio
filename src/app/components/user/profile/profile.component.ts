@@ -15,6 +15,8 @@ export class ProfileComponent implements OnInit {
   userId: string;
   user = {};
   boards: any;
+  following: any[];
+  followers: any[];
 
   constructor(
     private userService: UserService,
@@ -33,6 +35,18 @@ export class ProfileComponent implements OnInit {
           this.boardService.findBoardsByUser(this.userId).subscribe((boards) => {
             this.boards = boards;
           });
+          this.following = [];
+          for (let i = 0; i < this.user['following'].length; i++) {
+            this.userService.findUserById(this.user['following'][i]).subscribe((res: any) => {
+              this.following.push(res);
+            });
+          }
+          this.followers = [];
+          for (let i = 0; i < this.user['followedBy'].length ; i++) {
+            this.userService.findUserById(this.user['followedBy'][i]).subscribe((res: any) => {
+              this.followers.push(res);
+            });
+          }
         }
       );
   }
