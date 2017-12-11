@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../../services/user.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
 import {SharedService} from '../../../services/shared.service.client';
+import {BoardComponent} from '../../board/board.component';
+import {BoardService} from '../../../services/board/board.service';
 
 @Component({
     selector: 'app-view-profile',
@@ -13,12 +15,16 @@ export class ViewProfileComponent implements OnInit {
     activeUser: {};
     viewedUserId: string;
     viewedUser = {};
-    following: Boolean =  false;
+    isFollowing: Boolean =  false;
+    following: any[];
+    followers: any[];
+    boards: [{}];
 
     constructor(
         private userService: UserService,
         private activatedRoute: ActivatedRoute,
-        private sharedService: SharedService) { }
+        private sharedService: SharedService,
+        private boardService: BoardService) { }
 
     ngOnInit() {
 
@@ -29,9 +35,28 @@ export class ViewProfileComponent implements OnInit {
                   this.activeUser = this.sharedService.user || {};
                   this.userService.findUserById(this.viewedUserId).subscribe((user: any) => {
                     this.viewedUser = user;
+                    this.following = [];
+                    for (let i = 0; i < this.viewedUser['following'].length; i++) {
+                      this.userService.findUserById(this.viewedUser['following'][i]).subscribe((res: any) => {
+                        this.following.push(res);
+                      });
+                    }
+                    this.getFollowerProfiles();
+                  });
+                  this.boardService.findBoardsByUser(this.viewedUserId).subscribe((boards) => {
+                    this.boards = boards;
                   });
                 }
             );
+    }
+
+    getFollowerProfiles() {
+      this.followers = [];
+      for (let i = 0; i < this.viewedUser['followedBy'].length ; i++) {
+        this.userService.findUserById(this.viewedUser['followedBy'][i]).subscribe((res: any) => {
+          this.followers.push(res);
+        });
+      }
     }
 
     follow() {
@@ -39,7 +64,11 @@ export class ViewProfileComponent implements OnInit {
       this.userService.updateUser(this.viewedUserId, this.viewedUser).subscribe((user: any) => {
         this.activeUser['following'].push(this.viewedUserId);
         this.userService.updateUser(this.activeUser['_id'], this.activeUser).subscribe((thirdUser: any) => {
-          this.following = true;
+          this.isFollowing = true;
+          this.activeUser = thirdUser;
+        });
+        this.userService.findUserById(this.viewedUserId).subscribe((newUser: any) => {
+          this.getFollowerProfiles();
         });
       });
     }
@@ -51,8 +80,12 @@ export class ViewProfileComponent implements OnInit {
             const userFollowing = this.activeUser['following'];
             userFollowing.splice(userFollowing.indexOf(this.viewedUserId), 1);
             this.userService.updateUser(this.activeUser['_id'], this.activeUser).subscribe((thirdUser: any) => {
-                this.following = false;
+                this.isFollowing = false;
+                this.activeUser = thirdUser;
             });
+          this.userService.findUserById(this.viewedUserId).subscribe((newUser: any) => {
+            this.getFollowerProfiles();
+          });
         });
     }
 }

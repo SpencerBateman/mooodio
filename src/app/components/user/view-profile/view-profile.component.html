@@ -10,20 +10,53 @@
   </div>
 </nav>
 
-
-<div class="container-fluid zlr-main-content-container">
+<div class="container">
   <div class="row">
-    <p>Username: {{viewedUser['username']}}</p>
-    <p>First name: {{viewedUser['firstName']}}</p>
-    <p>Last name: {{viewedUser['lastName']}}</p>
-    <p>Following: {{viewedUser['following']}}</p>
-    <p>Followed by: {{viewedUser['followedBy']}}</p>
-    <a *ngIf="!following" class="btn btn-primary btn-block"
+    <div class="container">
+      <ul class="list-group">
+        <li class="list-group-item">
+          {{viewedUser['username']}}
+        </li>
+        <li class="list-group-item">
+          {{viewedUser['firstName']}} {{viewedUser['lastName']}}
+        </li>
+      </ul>
+    </div>
+    <br/>
+
+    <h2>{{viewedUser['username']}}'s Boards</h2>
+    <ul class="container">
+      <li class='board__preview' *ngFor="let board of boards" >
+        <h3 [routerLink]="['/board/', board._id]">{{board.name}}</h3>
+      </li>
+    </ul>
+    <div class="container">
+      <div class="row">
+        <div class="col-6 following-container">
+          <span class="row">Following:</span>
+          <ol>
+            <li *ngFor="let followed of following">
+              {{followed['username']}}
+            </li>
+          </ol>
+        </div>
+        <div class="col-6 follower-container">
+          <span class="row">Followers:</span>
+          <ol>
+            <li *ngFor="let follower of followers">
+              {{follower['username']}}
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <a *ngIf="!isFollowing" class="btn btn-primary btn-block"
        (click)="follow()">Follow</a>
-    <a *ngIf="following" class="btn btn-primary btn-block"
+    <a *ngIf="isFollowing" class="btn btn-primary btn-block"
        (click)="unfollow()">Unfollow</a>
   </div>
 </div>
+
 <!-- Footer -->
 <nav class="navbar navbar-default navbar-fixed-bottom">
   <div class="container-fluid">
