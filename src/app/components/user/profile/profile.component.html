@@ -55,11 +55,28 @@
     </ul>
     <a class="btn btn-danger btn-block "
       (click)="logout()" >Logout</a>
-    <a [routerLink]="['/profile/5a2cc2cab32d48162895f12a']">
-      GO TO PROFILE
-    </a>
-    <p>Following: {{user['following']}}</p>
-    <p>FollowedBy: {{user['followedBy']}}</p>
+    <div class="container">
+      <div class="row">
+        <div class="col-6 following-container">
+          <span class="row">Following:</span>
+          <ol>
+            <li *ngFor="let followed of following">
+              {{followed['username']}}
+            </li>
+          </ol>
+        </div>
+        <div class="col-6 follower-container">
+          <span class="row">Followers:</span>
+          <ol>
+            <li *ngFor="let follower of followers">
+              {{follower['username']}}
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <a class="btn btn-secondary btn-block"
+       [routerLink]="['/searchUsers']" >Search Users</a>
   </div>
 </div>
 
