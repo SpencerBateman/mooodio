@@ -33,5 +33,21 @@
     </div>
   </div>
   <button (click)="enableOverlay()" class='btn btn-primary btn-block'>Search Flickr</button>
+  <div class="mooodio-comment-container container-fluid">
+    <div *ngFor="let comment of comments" class="row">
+      <span>{{comment['authorName']}}</span>
+      <span>{{comment['text']}}</span>
+    </div>
+  </div>
+  <div *ngIf="editingComment" class="comment-field">
+    <input [(ngModel)]="commentText"
+           name="commentText"
+           type="text"
+           class="form-control"
+           id="commentText"
+           placeholder="Write a comment">
+    <button (click)="createComment()" class="btn btn-block">Submit</button>
+  </div>
+  <button (click)="editingComment = true" class="btn btn-secondary btn-block">Leave a Comment</button>
 </div>
 

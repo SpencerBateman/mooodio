@@ -1,10 +1,10 @@
 var mongoose = require('mongoose');
 var BoardSchema = mongoose.Schema ({
   name: String,
-  _user: {type: mongoose.Schema.Types.ObjectId, ref: 'UserModel'},
-  collaborators: [{type: mongoose.Schema.Types.ObjectId, ref: 'UserModel'}],
-  images: [{type: mongoose.Schema.Types.ObjectId, ref: 'ImageModel'}],
-  //comment: [{type: mongoose.Schema.Types.ObjectId, ref: 'CommentModel'}],
+  _user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+  collaborators: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
+  images: [{type: mongoose.Schema.Types.ObjectId, ref: 'Image'}],
+  comments: [{type: mongoose.Schema.Types.ObjectId, ref: 'Comment'}],
   dateCreated: { type: Date, default: Date.now }
 }, {collection: 'board'});
 

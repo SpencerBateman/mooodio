@@ -19,7 +19,8 @@ module.exports = function(app) {
 
   function createBoard(req, res) {
     let userId = req.params['userId'];
-    let board = {name: 'my new board'}
+    let board = {name: 'my new board', comments: []};
+
     boardModel.createBoardForUser(userId, board)
       .then(function (board) {
         res.json(board);
