@@ -19,6 +19,7 @@ export class ViewProfileComponent implements OnInit {
     following: any[];
     followers: any[];
     boards: [{}];
+    companies;
 
     constructor(
         private userService: UserService,
@@ -42,6 +43,7 @@ export class ViewProfileComponent implements OnInit {
                       });
                     }
                     this.getFollowerProfiles();
+                    this.getComapnies();
                   });
                   this.boardService.findBoardsByUser(this.viewedUserId).subscribe((boards) => {
                     this.boards = boards;
@@ -58,6 +60,15 @@ export class ViewProfileComponent implements OnInit {
         });
       }
     }
+
+  getComapnies() {
+    this.companies = [];
+    for (let i = 0; i < this.viewedUser['companies'].length ; i++) {
+      this.userService.findUserById(this.viewedUser['companies'][i]).subscribe((res: any) => {
+        this.companies.push(res);
+      });
+    }
+  }
 
     follow() {
       this.viewedUser['followedBy'].push(this.activeUser['_id']);
@@ -87,6 +98,20 @@ export class ViewProfileComponent implements OnInit {
             this.getFollowerProfiles();
           });
         });
+    }
+
+    hire() {
+      this.viewedUser['companies'].push(this.activeUser['_id']);
+      this.userService.updateUser(this.viewedUserId, this.viewedUser).subscribe((user: any) => {
+        this.activeUser['designers'].push(this.viewedUserId);
+        this.userService.updateUser(this.activeUser['_id'], this.activeUser).subscribe((thirdUser: any) => {
+          this.isFollowing = true;
+          this.activeUser = thirdUser;
+        });
+        this.userService.findUserById(this.viewedUserId).subscribe((newUser: any) => {
+          this.getComapnies();
+        });
+      });
     }
 }
 

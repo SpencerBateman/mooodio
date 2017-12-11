@@ -77,7 +77,7 @@
     <hr/>
     <ul class="container">
       <li class='board__preview' *ngFor="let designer of designers" >
-        <h3 [routerLink]="['/profile/', designer['_id']]">{{designer['name']}}</h3>
+        <h3 [routerLink]="['/profile/', designer['_id']]">{{designer['username']}}</h3>
       </li>
     </ul>
     <hr/>
