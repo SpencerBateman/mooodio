@@ -34,7 +34,6 @@ module.exports = function(app) {
   function localStrategy(usrn, pass, done) {
     userModel.findUserByUsername(usrn).then((user) => {
       if (user.username === usrn && bcrypt.compareSync(pass, user.password)) {
-        console.log('sucessfully done');
         return done(null, user);
       } else {
         return done(null, false);
@@ -100,8 +99,6 @@ module.exports = function(app) {
     userModel
       .createUser(user)
       .then(function(user) {
-        console.log("then");
-        console.log(user);
         res.json(user);
       });
   };

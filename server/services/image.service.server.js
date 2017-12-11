@@ -79,13 +79,7 @@ module.exports = function(app) {
     let boardId = req.params['boardId'];
     let board = await boardModel.findBoardById(boardId);
 
-    console.log('hello');
-
-    console.log(board.images);
-
     board.images.splice(board.images.indexOf(imageId), 1);
-
-    console.log(board.images);
 
     await boardModel.updateBoard(boardId, board);
 
