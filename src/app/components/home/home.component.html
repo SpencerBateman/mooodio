@@ -1,5 +1,8 @@
 <div class="container">
   <img src='/assets/images/logo.png'>
   <a [routerLink]="['/login']"><h3>Login</h3></a>
+  <div *ngFor="let board of boards">
+    {{board.name}}
+  </div>
 </div>
 
