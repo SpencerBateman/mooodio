@@ -17,6 +17,7 @@ import { BoardService } from './services/board/board.service';
 import { ImageService } from './services/image/image.service';
 import { DraggableDirective } from './directives/draggable.directive';
 import { ViewProfileComponent } from './components/user/view-profile/view-profile.component';
+import {CommentService} from './services/comment.service.client';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { ViewProfileComponent } from './components/user/view-profile/view-profil
     AuthenticationService,
     FlickrService,
     BoardService,
-    ImageService
+    ImageService,
+    CommentService
   ],
   bootstrap: [ AppComponent ]
 })

@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { FlickrService } from '../../services/flickr.service.client';
 import { ImageService } from '../../services/image/image.service';
 import { BoardService } from '../../services/board/board.service';
+import {CommentService} from '../../services/comment.service.client';
+import {SharedService} from '../../services/shared.service.client';
 declare var jquery:any;
 declare var $ :any;
 
@@ -19,22 +21,32 @@ export class BoardComponent implements OnInit {
   boardId: string;
   board: {};
   editingName: boolean;
+  comments: [{}];
+  editingComment: boolean;
+  commentText: string;
+  user: {};
 
   constructor(private flickrService: FlickrService,
     private imageService: ImageService,
     private activatedRoute: ActivatedRoute,
-    private boardService: BoardService) { }
+    private boardService: BoardService,
+    private commentService: CommentService,
+    private sharedService: SharedService) { }
 
   ngOnInit() {
     this.isSearching = false;
     this.editingName = false;
     this.activatedRoute.params.subscribe((params: any) => {
       this.boardId = params['boardId'];
+      this.user = this.sharedService.user || {};
       this.boardService.findBoardById(this.boardId).subscribe((board: any) => {
         this.board = board;
       });
       this.imageService.findImagesByBoardId(this.boardId).subscribe((images: any) => {
         this.photos = images;
+      });
+      this.commentService.findCommentsByBoardId(this.boardId).subscribe((comments: any) => {
+        this.comments = comments;
       });
     });
   }
@@ -87,8 +99,8 @@ export class BoardComponent implements OnInit {
   }
 
   savePosition(posObject) {
-    let id = posObject.id;
-    let position = posObject.pos;
+    const id = posObject.id;
+    const position = posObject.pos;
     this.imageService.findImageById(id).subscribe((image: any) => {
       image.top = position.top;
       image.left = position.left;
@@ -102,6 +114,17 @@ export class BoardComponent implements OnInit {
       this.boardService.findBoardById(this.boardId).subscribe((board: any) => {
         this.board = board;
       });
+    });
+  }
+
+  createComment() {
+    const comment = {'author': this.user['_id'], 'authorName': this.user['name'], 'text': this.commentText};
+    this.commentService.createComment(this.boardId, comment).subscribe((res: any) => {
+      this.editingComment = false;
+      this.commentService.findCommentsByBoardId(this.boardId).subscribe((comments: any) => {
+        this.comments = comments;
+      });
+      console.log('COMMENTS YO');
     });
   }
 }
