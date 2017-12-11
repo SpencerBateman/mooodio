@@ -25,7 +25,7 @@
     <div class='board__name'>
       <input *ngIf="editingName" [(ngModel)]="board['name']">
       <h2 class='board__name--h2' *ngIf="!editingName" (click)="editName()">{{board['name']}}</h2>
-      <div *ngIf="editingName" (click)="saveName()" ><i class="fa fa-edit fa-2x pull-right"></i></div>
+      <div *ngIf="editingName" (click)="saveName()" ><i class="fa fa-save fa-2x pull-right"></i></div>
     </div>
     <div *ngFor="let photo of photos" draggable [ngStyle]="{'left': photo.left, 'top': photo.top}" (newPosition)="savePosition($event)" class='board__photo' data-id='{{photo._id}}'>
       <div class='photo-x' (click)="deletePhoto(photo)">
@@ -37,7 +37,7 @@
   <button (click)="enableOverlay()" class='btn btn-primary btn-block'>Search Flickr</button>
   <div class="mooodio-comment-container container-fluid">
     <div *ngFor="let comment of comments" class="row">
-      <span>{{comment['authorName']}}</span>
+      <!--<span>{{comment['authorName']}}</span>-->
       <span>{{comment['text']}}</span>
     </div>
   </div>
@@ -50,6 +50,6 @@
            placeholder="Write a comment">
     <button (click)="createComment()" class="btn btn-block">Submit</button>
   </div>
-  <button (click)="editingComment = true" class="btn btn-secondary btn-block">Leave a Comment</button>
+  <button (click)="editingComment = true" class="btn btn-secondary btn-block">Comment</button>
 </div>
 

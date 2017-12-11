@@ -127,8 +127,8 @@ export class BoardComponent implements OnInit {
       this.editingComment = false;
       this.commentService.findCommentsByBoardId(this.boardId).subscribe((comments: any) => {
         this.comments = comments;
+        this.commentText = '';
       });
-      console.log('COMMENTS YO');
     });
   }
 }
