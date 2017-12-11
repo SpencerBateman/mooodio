@@ -6,72 +6,69 @@
 <hr/>
 
 <div class="container">
-  <div class="row">
+  <div *ngIf="isEditingProfile" class="row">
     <label for="username">Username</label>
-    <input [(ngModel)]="user.username"
-    name="username"
-    type="text"
-    class="form-control"
-    id="username"
-    placeholder="Alice">
-    <label for="email">Email address</label>
-    <input type="email"
-    class="form-control"
-    id="email"
-    [(ngModel)]="user.email"
-    placeholder="alice.wonderland@unicorn.com">
-    <label for="first-name">First Name</label>
-    <input [(ngModel)]="user.firstName"
-    name="firstName"
-    type="text"
-    class="form-control"
-    id="first-name"
-    placeholder="Alice">
-    <label for="last-name">Last Name</label>
-    <input [(ngModel)]="user.lastName"
-    name="lastName"
-    type="text"
-    class="form-control"
-    id="last-name"
-    placeholder="Wonderland">
-    <br/>
+    <input [(ngModel)]="user.username" name="username" type="text" class="form-control" id="username" placeholder="Alice">
 
-    <h2>My Boards</h2>
-    <ul class="container">
-      <li class='board__preview' *ngFor="let board of boards" >
-        <h3 [routerLink]="['/board/', board._id]">{{board.name}}</h3>
-        <div (click)="deleteBoard(board)" class='board-x'>
-          <i class='fa fa-times'></i>
-        </div>
-      </li>
-    </ul>
-    <a class="btn btn-primary btn-block"
-      (click)="createBoardAndNavigate()">Create Board</a>
-    <a class="btn btn-danger btn-block "
-      (click)="logout()" >Logout</a>
-    <div class="container">
-      <div class="row">
-        <div class="col-6 following-container">
-          <span class="row">Following:</span>
-          <ol>
-            <li *ngFor="let followed of following">
-              {{followed['username']}}
-            </li>
-          </ol>
-        </div>
-        <div class="col-6 follower-container">
-          <span class="row">Followers:</span>
-          <ol>
-            <li *ngFor="let follower of followers">
-              {{follower['username']}}
-            </li>
-          </ol>
-        </div>
+    <label for="first-name">First Name</label>
+    <input [(ngModel)]="user.firstName" name="firstName" type="text" class="form-control" id="first-name" placeholder="Alice">
+
+    <label for="last-name">Last Name</label>
+    <input [(ngModel)]="user.lastName" name="lastName" type="text" class="form-control" id="last-name" placeholder="Wonderland">
+    <div class='padding'></div>
+    <button (click)='updateProfile()' class='btn btn-primary'>Save Changes</button>
+  </div>
+
+  <div *ngIf="!isEditingProfile" class="container">
+    <div class="row">
+      <h1>{{user?.username}}</h1>
+    </div>
+    <div class="row">
+      <h2>{{user?.firstName}} {{user?.lastName}}</h2>
+    </div>
+    <div class="row">
+      <button (click)='editProfile()' class='btn btn-secondary'>Edit Profile</button>
+    </div>
+  </div>
+
+  <br/>
+
+  <div class="row">
+    <h2 class='col-10'>My Boards</h2>
+    <a class="col-2 btn btn-primary pull-right" (click)="createBoardAndNavigate()">Create Board</a>
+  </div>
+  <hr/>
+  <ul class="container">
+    <li class='board__preview' *ngFor="let board of boards" >
+      <h3 [routerLink]="['/board/', board._id]">{{board.name}}</h3>
+      <div (click)="deleteBoard(board)" class='board-x'>
+        <i class='fa fa-times'></i>
+      </div>
+    </li>
+  </ul>
+  <hr/>
+  <div class="container">
+    <div class="row">
+      <div class="col-6 following-container">
+        <span class="row">Following:</span>
+        <ol>
+          <li *ngFor="let followed of following">
+            {{followed['username']}}
+          </li>
+        </ol>
+      </div>
+      <div class="col-6 follower-container">
+        <span class="row">Followers:</span>
+        <ol>
+          <li *ngFor="let follower of followers">
+            {{follower['username']}}
+          </li>
+        </ol>
       </div>
     </div>
-    <a class="btn btn-secondary btn-block"
-       [routerLink]="['/searchUsers']" >Search Users</a>
   </div>
+  <a class="btn btn-secondary btn-block" [routerLink]="['/searchUsers']" >Search Users</a>
+  <a class="btn btn-danger btn-block" (click)="logout()">Logout</a>
 </div>
 
 <!-- Footer -->

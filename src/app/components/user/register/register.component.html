@@ -11,22 +11,29 @@
       Please fill out all fields. All Fields are required
     </div>
     <h1>Register</h1>
-      <br/>
+    <br/>
     <form (ngSubmit) = "register()" #f="ngForm">
+      <p>Username</p>
       <input name='username' [(ngModel)]='username' type='text' class='form-control' placeholder='Please Enter A Username'>
       <br/>
+      <p>First Name</p>
       <input name='firstName' [(ngModel)]='firstName' type='text' class='form-control' placeholder='Please Enter Your First Name'>
       <br/>
+      <p>Last Name</p>
       <input name='lastName' [(ngModel)]='lastName' type='text' class='form-control' placeholder='Please Enter Your Last Name'>
       <br/>
+      <p>Password</p>
       <input name='password' [(ngModel)]='password' type='password' class='form-control' placeholder='Please Enter A Password'>
       <br/>
+      <p>Verify Password</p>
       <input name='conf_password' [(ngModel)]='conf_password' type='password' class='form-control' placeholder='Verify Baby!'>
       <br/>
       <br/>
       <button type='submit' class='btn btn-primary btn-block'>Register</button>
     </form>
-      <br/>
+    <br/>
     <a [routerLink]="['/login']"><button type='button' class='btn btn-danger btn-block'>Cancel</button></a>
   </div>
+  <br/>
+  <br/>
 </div>

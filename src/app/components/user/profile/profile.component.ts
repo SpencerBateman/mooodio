@@ -17,6 +17,7 @@ export class ProfileComponent implements OnInit {
   boards: any;
   following: any[];
   followers: any[];
+  isEditingProfile: boolean;
 
   constructor(
     private userService: UserService,
@@ -26,6 +27,7 @@ export class ProfileComponent implements OnInit {
     private sharedService: SharedService) { }
 
   ngOnInit() {
+    this.isEditingProfile = false;
 
     this.activatedRoute.params
       .subscribe(
@@ -53,7 +55,12 @@ export class ProfileComponent implements OnInit {
 
   updateProfile() {
     this.userService.updateUser(this.userId, this.user).subscribe((data: any) => {
+      this.isEditingProfile = false;
     });
+  }
+
+  editProfile() {
+    this.isEditingProfile = true;
   }
 
   createBoardAndNavigate() {

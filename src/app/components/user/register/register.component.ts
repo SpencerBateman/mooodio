@@ -27,31 +27,30 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
   }
 
-    register() {
-        this.username = this.registerForm.value.username;
-        this.password = this.registerForm.value.password;
-        this.conf_password = this.registerForm.value.conf_password;
-        this.firstName = this.registerForm.value.firstName;
-        this.lastName = this.registerForm.value.lastName;
+  register() {
+    this.username = this.registerForm.value.username;
+    this.password = this.registerForm.value.password;
+    this.conf_password = this.registerForm.value.conf_password;
+    this.firstName = this.registerForm.value.firstName;
+    this.lastName = this.registerForm.value.lastName;
 
-        if (!this.username || !this.password || !this.conf_password) {
-            // this.passwordFlag = false;
-            this.errorFlag = true;
-            this.errorMsg = 'Please enter at least a username, password, and password confirmation';
-        } else {
-            if (this.password === this.conf_password) {
-                // this.passwordFlag = false;
-                const newUser: User = new User(this.username, this.password, this.firstName, this.lastName, [], []);
-                this.userService.register(newUser)
-                    .subscribe(
-                        (data: any) => {
-                            this.sharedService.user = data;
-                            this.router.navigate(['/profile']);
-                        });
-            } else {
-                // this.passwordFlag = true;
-                this.errorMsg = 'Passwords don\'t match!';
-            }
-        }
+    if (!this.username || !this.password || !this.conf_password) {
+      // this.passwordFlag = false;
+      this.errorFlag = true;
+      this.errorMsg = 'Please enter at least a username, password, and password confirmation';
+    } else {
+      if (this.password === this.conf_password) {
+        const newUser: User = new User(this.username, this.password, this.firstName, this.lastName, [], []);
+        this.userService.register(newUser)
+          .subscribe(
+            (data: any) => {
+              this.sharedService.user = data;
+              this.router.navigate(['/profile']);
+            });
+      } else {
+        // this.passwordFlag = true;
+        this.errorMsg = 'Passwords don\'t match!';
+      }
     }
+  }
 }
