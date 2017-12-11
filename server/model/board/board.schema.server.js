@@ -4,7 +4,7 @@ var BoardSchema = mongoose.Schema ({
   _user: {type: mongoose.Schema.Types.ObjectId, ref: 'UserModel'},
   collaborators: [{type: mongoose.Schema.Types.ObjectId, ref: 'UserModel'}],
   images: [{type: mongoose.Schema.Types.ObjectId, ref: 'ImageModel'}],
-  //comments: [{type: mongoose.Schema.Types.ObjectId, ref: 'CommentModel'}],
+  //comment: [{type: mongoose.Schema.Types.ObjectId, ref: 'CommentModel'}],
   dateCreated: { type: Date, default: Date.now }
 }, {collection: 'board'});
 
