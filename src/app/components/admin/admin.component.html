@@ -1,8 +1,9 @@
 <div class="container">
   <div class="row">
-    <button class="col-4 btn" (click)="searchDesigners()">Designers</button>
-    <button class="col-4 btn" (click)="searchCompanies()">Companies</button>
-    <button class="col-4 btn" (click)="searchBoards()">Boards</button>
+    <button class="col-3 btn" (click)="searchDesigners()">Designers</button>
+    <button class="col-3 btn" (click)="searchCompanies()">Companies</button>
+    <button class="col-3 btn" (click)="searchBoards()">Boards</button>
+    <button class="col-3 btn" [routerLink]="['/profile']">Back to Profile</button>
   </div>
   <div class="row">
     <input id='searchTerm' name='searchTerm' [(ngModel)]='searchTerm' type='text' class='col-9 form-control'>
