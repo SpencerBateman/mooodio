@@ -9,6 +9,7 @@ UserModel.findUserByCredentials = findUserByCredentials;
 UserModel.updateUser = updateUser;
 UserModel.deleteUser = deleteUser;
 UserModel.findUserByFacebookId = findUserByFacebookId;
+UserModel.searchUsers = searchUsers;
 
 function findUserByFacebookId(facebookId) {
  return UserModel.findOne({'facebook.id': facebookId});
@@ -41,7 +42,8 @@ function deleteUser(userId) {
 }
 
 function searchUsers(name) {
-  return UserModel.find({username: {$regex: /name/}});
+  let reg = new RegExp(name, 'gi');
+  return UserModel.find({username: {$regex: reg}});
 }
 
 module.exports = UserModel;

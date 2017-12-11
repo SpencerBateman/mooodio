@@ -6,6 +6,8 @@ module.exports = function(app) {
   passport.serializeUser(serializeUser);
   passport.deserializeUser(deserializeUser);
 
+
+  app.get('/api/user/search', searchUsers);
   app.post('/api/login', passport.authenticate('local'), login);
   app.post('/api/loggedIn', loggedIn);
   app.post('/api/register', register);
@@ -122,4 +124,11 @@ module.exports = function(app) {
       return;
     }
   }
-}
+
+  function searchUsers(req, res) {
+    let searchTerm = req.query['searchTerm'];
+    userModel.searchUsers(searchTerm).then(function(users) {
+      res.json(users);
+    })
+  }
+};
