@@ -1,8 +1,13 @@
 <div class="container">
   <img src='/assets/images/logo.png'>
-  <a [routerLink]="['/login']"><h3>Login</h3></a>
-  <div *ngFor="let board of boards">
-    {{board.name}}
+  <div class='padding'></div>
+  <div class='board__box--container'>
+    <div class='board__box' *ngFor="let board of boards">
+      <p>{{board.name}}</p>
+    </div>
   </div>
+  <div class='padding'></div>
+  <button class='btn btn-primary btn-block' [routerLink]="['/login']">Get Started</button>
+  <div class='padding'></div>
 </div>
 

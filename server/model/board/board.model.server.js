@@ -40,7 +40,7 @@ function deleteBoard(boardId) {
 
 async function sample() {
   console.log('sampled');
-  let sample = await BoardModel.aggregate([{ $sample: {size: 4}}]);
+  let sample = await BoardModel.aggregate([{ $sample: {size: 12}}]);
   return sample;
 }
 

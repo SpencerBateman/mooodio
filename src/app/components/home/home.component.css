@@ -2,3 +2,23 @@ img {
   display: block;
   width: 100%;
 }
+
+.board__box--container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.board__box {
+  background: #c1c1c1;
+  display: inline-block;
+  height: 200px;
+  border-radius: 10px;
+  width: 30%;
+  margin: 15px 10px;
+}
+
+p {
+  margin: 10px 0 0 10px;
+}
