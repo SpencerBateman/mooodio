@@ -19,7 +19,8 @@ export class ViewProfileComponent implements OnInit {
     following: any[];
     followers: any[];
     boards: [{}];
-    companies;
+    companies: any[];
+    designers: any[];
 
     constructor(
         private userService: UserService,
@@ -40,6 +41,12 @@ export class ViewProfileComponent implements OnInit {
                     for (let i = 0; i < this.viewedUser['following'].length; i++) {
                       this.userService.findUserById(this.viewedUser['following'][i]).subscribe((res: any) => {
                         this.following.push(res);
+                      });
+                    }
+                    this.designers = [];
+                    for (let i = 0; i < this.viewedUser['designers'].length; i++) {
+                      this.userService.findUserById(this.viewedUser['designers'][i]).subscribe((res: any) => {
+                        this.designers.push(res);
                       });
                     }
                     this.getFollowerProfiles();

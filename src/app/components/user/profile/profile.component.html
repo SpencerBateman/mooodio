@@ -47,6 +47,12 @@
         </div>
       </li>
     </ul>
+    <h2 class='col-10'>My Companies</h2>
+    <ul class="container">
+      <li class='company__preview' *ngFor="let company of companies" >
+        <h3 [routerLink]="['/profile/', company['_id']]">{{company['username']}}</h3>
+      </li>
+    </ul>
     <hr/>
     <div class="container">
       <div class="row">

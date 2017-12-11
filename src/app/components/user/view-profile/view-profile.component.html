@@ -24,12 +24,38 @@
     </div>
     <br/>
 
-    <h2>{{viewedUser['username']}}'s Boards</h2>
-    <ul class="container">
-      <li class='board__preview' *ngFor="let board of boards" >
-        <h3 [routerLink]="['/board/', board._id]">{{board.name}}</h3>
-      </li>
-    </ul>
+    <div *ngIf="viewedUser['role'] === 'DESIGNER'">
+      <ul class="container">
+        <h2>{{viewedUser['username']}}'s Boards</h2>
+        <li class='board__preview' *ngFor="let board of boards" >
+          <h3 [routerLink]="['/board/', board._id]">{{board.name}}</h3>
+        </li>
+      </ul>
+      <div class="container">
+        <div class="row">
+          <div class="col-12 following-container">
+            <span class="row">Companies:</span>
+            <ul>
+              <li *ngFor="let company of companies">
+                {{company['username']}}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <a *ngIf="activeUser['role'] === 'COMPANY'" class="btn btn-primary btn-block"
+         (click)="hire()">Hire</a>
+    </div>
+
+    <div *ngIf="viewedUser['role'] === 'COMPANY'">
+      <ul class="container">
+        <h2>{{viewedUser['username']}}'s Designers</h2>
+        <li class='board__preview' *ngFor="let designer of designers" >
+          <h3 [routerLink]="['/profile', designer['_id']]">{{designer['username']}}</h3>
+        </li>
+      </ul>
+    </div>
+
     <div class="container">
       <div class="row">
         <div class="col-6 following-container">
@@ -54,20 +80,6 @@
        (click)="follow()">Follow</a>
     <a *ngIf="isFollowing" class="btn btn-primary btn-block"
        (click)="unfollow()">Unfollow</a>
-    <div class="container">
-      <div class="row">
-        <div class="col-12 following-container">
-          <span class="row">Companies:</span>
-          <ul>
-            <li *ngFor="let company of companies">
-              {{company['username']}}
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <a *ngIf="activeUser['role'] === 'COMPANY'" class="btn btn-primary btn-block"
-       (click)="hire()">Hire</a>
   </div>
 </div>
 

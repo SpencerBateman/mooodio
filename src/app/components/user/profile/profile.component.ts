@@ -19,6 +19,7 @@ export class ProfileComponent implements OnInit {
   followers: any[];
   isEditingProfile: boolean;
   designers: any[];
+  companies: any[];
 
   constructor(
     private userService: UserService,
@@ -54,6 +55,12 @@ export class ProfileComponent implements OnInit {
           for (let i = 0; i < this.user['designers'].length ; i++) {
             this.userService.findUserById(this.user['designers'][i]).subscribe((res: any) => {
               this.designers.push(res);
+            });
+          }
+          this.companies = [];
+          for (let i = 0; i < this.user['companies'].length ; i++) {
+            this.userService.findUserById(this.user['companies'][i]).subscribe((res: any) => {
+              this.companies.push(res);
             });
           }
         }
