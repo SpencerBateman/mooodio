@@ -13,6 +13,7 @@ import {User} from '../../../models/user.model.client';
 export class RegisterComponent implements OnInit {
 
   @ViewChild('f') registerForm: NgForm;
+  @ViewChild('g') companyRegisterForm: NgForm;
 
   username: string;
   firstName: string;
@@ -34,13 +35,42 @@ export class RegisterComponent implements OnInit {
     this.firstName = this.registerForm.value.firstName;
     this.lastName = this.registerForm.value.lastName;
 
+        if (!this.username || !this.password || !this.conf_password) {
+            // this.passwordFlag = false;
+            this.errorFlag = true;
+            this.errorMsg = 'Please enter at least a username, password, and password confirmation';
+        } else {
+            if (this.password === this.conf_password) {
+                // this.passwordFlag = false;
+                const newUser: User = new User(this.username, this.password, this.firstName, this.lastName, [], [], 'DESIGNER');
+                this.userService.register(newUser)
+                    .subscribe(
+                        (data: any) => {
+                            this.sharedService.user = data;
+                            this.router.navigate(['/profile']);
+                        });
+            } else {
+                // this.passwordFlag = true;
+                this.errorMsg = 'Passwords don\'t match!';
+            }
+        }
+    }
+
+  registerCompany() {
+    this.username = this.companyRegisterForm.value.username;
+    this.password = this.companyRegisterForm.value.password;
+    this.conf_password = this.companyRegisterForm.value.conf_password;
+    this.firstName = this.companyRegisterForm.value.firstName;
+    this.lastName = this.companyRegisterForm.value.lastName;
+
     if (!this.username || !this.password || !this.conf_password) {
       // this.passwordFlag = false;
       this.errorFlag = true;
       this.errorMsg = 'Please enter at least a username, password, and password confirmation';
     } else {
       if (this.password === this.conf_password) {
-        const newUser: User = new User(this.username, this.password, this.firstName, this.lastName, [], []);
+        // this.passwordFlag = false;
+        const newUser: User = new User(this.username, this.password, this.firstName, this.lastName, [], [], 'COMPANY');
         this.userService.register(newUser)
           .subscribe(
             (data: any) => {
