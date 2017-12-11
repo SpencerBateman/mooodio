@@ -44,9 +44,9 @@
   </div>
   <button *ngIf="canView()" (click)="enableOverlay()" class='btn btn-primary btn-block'>Search Flickr</button>
   <div class="mooodio-comment-container container-fluid">
+    <h2>Comments: </h2>
     <div *ngFor="let comment of comments" class="row">
-      <!--<span>{{comment['authorName']}}</span>-->
-      <span>{{comment['text']}}</span>
+      <div class="row">{{comment['authorName']}}:  {{comment['text']}}</div>
     </div>
   </div>
   <div *ngIf="editingComment" class="comment-field">

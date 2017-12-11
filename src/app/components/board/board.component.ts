@@ -129,7 +129,7 @@ export class BoardComponent implements OnInit {
   }
 
   createComment() {
-    const comment = {'author': this.user['_id'], 'authorName': this.user['name'], 'text': this.commentText};
+    const comment = {'author': this.user['_id'], 'authorName': this.user['username'], 'text': this.commentText};
     this.commentService.createComment(this.boardId, comment).subscribe((res: any) => {
       this.editingComment = false;
       this.commentService.findCommentsByBoardId(this.boardId).subscribe((comments: any) => {
