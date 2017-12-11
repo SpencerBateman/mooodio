@@ -2,7 +2,7 @@
   <img src='/assets/images/logo.png'>
   <div class='padding'></div>
   <div class='board__box--container'>
-    <div class='board__box' *ngFor="let board of boards">
+    <div [routerLink]="['/board', board['_id']]" class='board__box' *ngFor="let board of boards">
       <p>{{board.name}}</p>
     </div>
   </div>
