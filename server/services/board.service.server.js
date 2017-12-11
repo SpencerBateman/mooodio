@@ -10,12 +10,12 @@ module.exports = function(app) {
     'deleteBoard'       : this.deleteBoard
   };
 
+  app.get('/api/board/all', getAllBoards);
   app.post('/api/user/:userId/board', createBoard);
   app.get('/api/user/:userId/board', findAllBoardsForUser);
   app.get('/api/board/:boardId', findBoardById);
   app.put('/api/board/:boardId', updateBoard);
   app.delete('/api/board/:boardId', deleteBoard);
-  app.get('/api/board/all', getAllBoards);
 
   function createBoard(req, res) {
     let userId = req.params['userId'];
