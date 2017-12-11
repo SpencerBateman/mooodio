@@ -17,6 +17,7 @@ module.exports = function(app) {
   app.get('/api/user/:userId', findUserById);
   app.put('/api/user/:userId', updateUser);
   app.post('/api/user', createUser);
+  app.delete('/api/user/:userId', deleteUser);
 
   let LocalStrategy = require('passport-local').Strategy;
   passport.use(new LocalStrategy(localStrategy));
@@ -130,5 +131,16 @@ module.exports = function(app) {
     userModel.searchUsers(searchTerm).then(function(users) {
       res.json(users);
     })
+  }
+
+  function deleteUser(req, res) {
+    let userId = req.params['userId'];
+    userModel.deleteUser(userId).then(function(ignore) {
+      userModel.findUserById(userId).then(function (err, doc) {
+        if (!doc) {
+          res.json({});
+        }
+      });
+    });
   }
 };

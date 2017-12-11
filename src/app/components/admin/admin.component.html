@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">
+    <button class="col-4 btn" (click)="searchDesigners()">Designers</button>
+    <button class="col-4 btn" (click)="searchCompanies()">Companies</button>
+    <button class="col-4 btn" (click)="searchBoards()">Boards</button>
+  </div>
+  <div class="row">
+    <input id='searchTerm' name='searchTerm' [(ngModel)]='searchTerm' type='text' class='col-9 form-control'>
+    <button (click)="search()" class="btn btn-primary btn-block col-3">Search</button>
+  </div>
+
+  <ul *ngIf="searchContext === 'USERS'" class="list-group">
+    <li *ngFor="let foundUser of users" class="list-group-item">
+      <div class="row">
+        <div class="col-12">
+          <a [routerLink]="['/profile', foundUser['_id']]">
+            {{foundUser['username']}}
+          </a>
+          <div (click)="deleteUser(foundUser['_id'])" class='board-x'>
+            <i class='fa fa-times'></i>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+
+  <ul *ngIf="searchContext === 'BOARDS'" class="container">
+    <li class='board__preview' *ngFor="let board of boards" >
+      <h3 [routerLink]="['/board/', board['_id']]">{{board['name']}}</h3>
+      <div (click)="deleteBoard(board['_id'])" class='board-x'>
+        <i class='fa fa-times'></i>
+      </div>
+    </li>
+  </ul>
+
+</div>

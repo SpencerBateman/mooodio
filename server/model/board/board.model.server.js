@@ -10,6 +10,7 @@ BoardModel.findAllBoardsForUser     = findAllBoardsForUser;
 BoardModel.updateBoard              = updateBoard;
 BoardModel.deleteBoard              = deleteBoard;
 BoardModel.sample                   = sample;
+BoardModel.searchBoards             = searchBoards;
 
 async function createBoardForUser(userId, board) {
   let user = await UserModel.findUserById(userId);
@@ -42,6 +43,11 @@ async function sample() {
   console.log('sampled');
   let sample = await BoardModel.aggregate([{ $sample: {size: 12}}]);
   return sample;
+}
+
+function searchBoards(name) {
+  let reg = new RegExp(name, 'gi');
+  return BoardModel.find({name: {$regex: reg}});
 }
 
 module.exports = BoardModel;

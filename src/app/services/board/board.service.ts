@@ -60,6 +60,13 @@ export class BoardService {
       return res.json();
     });
   }
+
+  searchBoards(searchTerm: string) {
+    return this._http.get(this.baseUrl + '/api/board/search?searchTerm=' + searchTerm)
+      .map((res: Response) => {
+        return res.json();
+      });
+  }
 }
 
 

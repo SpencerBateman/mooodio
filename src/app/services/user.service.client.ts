@@ -121,7 +121,7 @@ export class UserService {
         return this._http.delete(this.baseUrl + '/api/user/' + userId)
             .map(
                 (res: Response) => {
-                    return !res.json();
+                    return res.json();
                 }
             );
     }

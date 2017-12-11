@@ -8,9 +8,11 @@ import { AuthenticationService } from './services/authentication.service.client'
 import { BoardComponent } from './components/board/board.component';
 import {ViewProfileComponent} from './components/user/view-profile/view-profile.component';
 import {SearchUsersComponent} from './components/search-users/search-users.component';
+import {AdminComponent} from './components/admin/admin.component';
 
 const APP_ROUTES: Routes = [
   {path: '', component: HomeComponent},
+  {path: 'admin', component: AdminComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'board/:boardId', component: BoardComponent},

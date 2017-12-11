@@ -7,9 +7,11 @@ module.exports = function(app) {
     'findBoardsByUser'  : this.findBoardsByUser,
     'findBoardById'     : this.findBoardById,
     'updateBoard'       : this.updateBoard,
-    'deleteBoard'       : this.deleteBoard
+    'deleteBoard'       : this.deleteBoard,
+    'searchBoards'      : this.searchBoards
   };
 
+  app.get('/api/board/search', searchBoards);
   app.get('/api/board/all', getAllBoards);
   app.post('/api/user/:userId/board', createBoard);
   app.get('/api/user/:userId/board', findAllBoardsForUser);
@@ -67,6 +69,13 @@ module.exports = function(app) {
     boardModel.sample().then((sample) => {
       res.json(sample);
     });
+  }
+
+  function searchBoards(req, res) {
+    let searchTerm = req.query['searchTerm'];
+    boardModel.searchBoards(searchTerm).then(function(boards) {
+      res.json(boards);
+    })
   }
 };
 
