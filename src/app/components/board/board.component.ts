@@ -111,6 +111,7 @@ export class BoardComponent implements OnInit {
 
   deletePhoto(photo) {
     this.imageService.deleteImage(photo._id, this.board['_id']).subscribe((res) => {
+      console.log('deleted');
       this.boardService.findBoardById(this.boardId).subscribe((board: any) => {
         this.board = board;
       });
