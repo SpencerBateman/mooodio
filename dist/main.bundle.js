@@ -599,7 +599,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/board/board.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class='container'>\r\n  <nav class=\"navbar navbar-default\">\r\n    <div class=\"navbar-header\">\r\n      <img [routerLink]=\"['/profile']\" class='navbar-image' src='/assets/images/logo.png'>\r\n    </div>\r\n  </nav>\r\n  <div *ngIf='isSearching' class='searchOverlay'>\r\n    <div class='flickr-background'>\r\n    </div>\r\n    <div class='container'>\r\n      <div class='flickr-box'>\r\n        <h2>Flickr</h2>\r\n        <input [(ngModel)]=\"searchText\" name=\"searchText\" type='text' class='form-control' placeholder='Search Query'>\r\n        <a (click)=\"searchPhotos()\"><button class=\"btn btn-primary\">SEARCH</button></a>\r\n        <div class='container'>\r\n          <div class=\"row\">\r\n            <div *ngFor = \"let pic of flickrPhotos['photo']\" class=\"col-3\">\r\n              <img (click)=\"selectPhoto(pic)\"\r\n              width=\"100%\"\r\n              [src]=\"['https://farm' + pic.farm + '.staticflickr.com/' + pic.server + '/' +   pic.id + '_' + pic.secret + '_s.jpg']\"/>\r\n              <p></p>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <button (click)=\"disableOverlay()\" class='btn btn-danger btn-block'>Cancel</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div *ngIf=\"canView()\" class='board' id='board'>\r\n    <div class='board__name'>\r\n      <input *ngIf=\"editingName\" [(ngModel)]=\"board['name']\">\r\n      <h2 class='board__name--h2' *ngIf=\"!editingName\" (click)=\"editName()\">{{board['name']}}</h2>\r\n      <div *ngIf=\"editingName\" (click)=\"saveName()\" ><i class=\"fa fa-save fa-2x pull-right\"></i></div>\r\n    </div>\r\n    <div *ngFor=\"let photo of photos\" draggable [ngStyle]=\"{'left': photo.left, 'top': photo.top}\" (newPosition)=\"savePosition($event)\" class='board__photo' data-id='{{photo._id}}'>\r\n      <div class='photo-x' (click)=\"deletePhoto(photo)\">\r\n        <i class='fa fa-times'></i>\r\n      </div>\r\n      <img src={{photo.url}}>\r\n    </div>\r\n  </div>\r\n  <div *ngIf=\"!canView()\" class=\"board container\">\r\n    <div class=\"row\">Sorry, you don't have permission to view this board.</div>\r\n  </div>\r\n  <button *ngIf=\"canView()\" (click)=\"enableOverlay()\" class='btn btn-primary btn-block'>Search Flickr</button>\r\n  <div class=\"mooodio-comment-container container-fluid\">\r\n    <div *ngFor=\"let comment of comments\" class=\"row\">\r\n      <!--<span>{{comment['authorName']}}</span>-->\r\n      <span>{{comment['text']}}</span>\r\n    </div>\r\n  </div>\r\n  <div *ngIf=\"editingComment\" class=\"comment-field\">\r\n    <input [(ngModel)]=\"commentText\"\r\n    name=\"commentText\"\r\n    type=\"text\"\r\n    class=\"form-control\"\r\n    id=\"commentText\"\r\n    placeholder=\"Write a comment\">\r\n    <button (click)=\"createComment()\" class=\"btn btn-block\">Submit</button>\r\n  </div>\r\n  <button *ngIf=\"canView()\" (click)=\"editingComment = true\" class=\"btn btn-secondary btn-block\">Comment</button>\r\n  <button *ngIf=\"canView() && board['public']\" (click)=\"makePrivate()\" class=\"btn btn-secondary btn-block\">Make Private</button>\r\n  <button *ngIf=\"canView() && !board['public']\" (click)=\"makePublic()\" class=\"btn btn-secondary btn-block\">Make Public</button>\r\n  <button *ngIf=\"canView() && !board['public']\" [routerLink]=\"['/board', boardId, 'addCollaborator']\" class=\"btn btn-secondary btn-block\">Add Collaborator</button>\r\n  <button *ngIf=\"!canView()\" [routerLink]=\"['/profile']\" class=\"btn btn-secondary btn-block\">Home</button>\r\n</div>\r\n\r\n"
+module.exports = "<div class='container'>\r\n  <nav class=\"navbar navbar-default\">\r\n    <div class=\"navbar-header\">\r\n      <img [routerLink]=\"['/profile']\" class='navbar-image' src='/assets/images/logo.png'>\r\n    </div>\r\n  </nav>\r\n  <div *ngIf='isSearching' class='searchOverlay'>\r\n    <div class='flickr-background'>\r\n    </div>\r\n    <div class='container'>\r\n      <div class='flickr-box'>\r\n        <h2>Flickr</h2>\r\n        <input [(ngModel)]=\"searchText\" name=\"searchText\" type='text' class='form-control' placeholder='Search Query'>\r\n        <a (click)=\"searchPhotos()\"><button class=\"btn btn-primary\">SEARCH</button></a>\r\n        <div class='container'>\r\n          <div class=\"row\">\r\n            <div *ngFor = \"let pic of flickrPhotos['photo']\" class=\"col-3\">\r\n              <img (click)=\"selectPhoto(pic)\"\r\n              width=\"100%\"\r\n              [src]=\"['https://farm' + pic.farm + '.staticflickr.com/' + pic.server + '/' +   pic.id + '_' + pic.secret + '_s.jpg']\"/>\r\n              <p></p>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <button (click)=\"disableOverlay()\" class='btn btn-danger btn-block'>Cancel</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div *ngIf=\"canView()\" class='board' id='board'>\r\n    <div class='board__name'>\r\n      <input *ngIf=\"editingName\" [(ngModel)]=\"board['name']\">\r\n      <h2 class='board__name--h2' *ngIf=\"!editingName\" (click)=\"editName()\">{{board['name']}}</h2>\r\n      <div *ngIf=\"editingName\" (click)=\"saveName()\" ><i class=\"fa fa-save fa-2x pull-right\"></i></div>\r\n    </div>\r\n    <div *ngFor=\"let photo of photos\" draggable [ngStyle]=\"{'left': photo.left, 'top': photo.top}\" (newPosition)=\"savePosition($event)\" class='board__photo' data-id='{{photo._id}}'>\r\n      <div class='photo-x' (click)=\"deletePhoto(photo)\">\r\n        <i class='fa fa-times'></i>\r\n      </div>\r\n      <img src={{photo.url}}>\r\n    </div>\r\n  </div>\r\n  <div *ngIf=\"!canView()\" class=\"board container\">\r\n    <div class=\"row\">Sorry, you don't have permission to view this board.</div>\r\n  </div>\r\n  <button *ngIf=\"canView()\" (click)=\"enableOverlay()\" class='btn btn-primary btn-block'>Search Flickr</button>\r\n  <div class=\"mooodio-comment-container container-fluid\">\r\n    <h2>Comments: </h2>\r\n    <div *ngFor=\"let comment of comments\" class=\"row\">\r\n      <div class=\"row\">{{comment['authorName']}}:  {{comment['text']}}</div>\r\n    </div>\r\n  </div>\r\n  <div *ngIf=\"editingComment\" class=\"comment-field\">\r\n    <input [(ngModel)]=\"commentText\"\r\n    name=\"commentText\"\r\n    type=\"text\"\r\n    class=\"form-control\"\r\n    id=\"commentText\"\r\n    placeholder=\"Write a comment\">\r\n    <button (click)=\"createComment()\" class=\"btn btn-block\">Submit</button>\r\n  </div>\r\n  <button *ngIf=\"canView()\" (click)=\"editingComment = true\" class=\"btn btn-secondary btn-block\">Comment</button>\r\n  <button *ngIf=\"canView() && board['public']\" (click)=\"makePrivate()\" class=\"btn btn-secondary btn-block\">Make Private</button>\r\n  <button *ngIf=\"canView() && !board['public']\" (click)=\"makePublic()\" class=\"btn btn-secondary btn-block\">Make Public</button>\r\n  <button *ngIf=\"canView() && !board['public']\" [routerLink]=\"['/board', boardId, 'addCollaborator']\" class=\"btn btn-secondary btn-block\">Add Collaborator</button>\r\n  <button *ngIf=\"!canView()\" [routerLink]=\"['/profile']\" class=\"btn btn-secondary btn-block\">Home</button>\r\n</div>\r\n\r\n"
 
 /***/ }),
 
@@ -731,7 +731,7 @@ var BoardComponent = (function () {
     };
     BoardComponent.prototype.createComment = function () {
         var _this = this;
-        var comment = { 'author': this.user['_id'], 'authorName': this.user['name'], 'text': this.commentText };
+        var comment = { 'author': this.user['_id'], 'authorName': this.user['username'], 'text': this.commentText };
         this.commentService.createComment(this.boardId, comment).subscribe(function (res) {
             _this.editingComment = false;
             _this.commentService.findCommentsByBoardId(_this.boardId).subscribe(function (comments) {
@@ -1339,7 +1339,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/user/register/register.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n  <nav class=\"navbar navbar-default\">\r\n    <div class=\"navbar-header\">\r\n      <img [routerLink]=\"['/']\" class='navbar-image' src='/assets/images/logo.png'>\r\n    </div>\r\n  </nav>\r\n  <hr/>\r\n  <div class='login__container'>\r\n    <div *ngIf=\"errorFlag\"\r\n      class=\"alert alert-danger\">\r\n      Please fill out all fields. All Fields are required\r\n    </div>\r\n    <h1>Register</h1>\r\n    <br/>\r\n    <form (ngSubmit) = \"register()\" #f=\"ngForm\">\r\n      <p>Username</p>\r\n      <input name='username' [(ngModel)]='username' type='text' class='form-control' placeholder='Please Enter A Username'>\r\n      <br/>\r\n      <p>First Name</p>\r\n      <input name='firstName' [(ngModel)]='firstName' type='text' class='form-control' placeholder='Please Enter Your First Name'>\r\n      <br/>\r\n      <p>Last Name</p>\r\n      <input name='lastName' [(ngModel)]='lastName' type='text' class='form-control' placeholder='Please Enter Your Last Name'>\r\n      <br/>\r\n      <p>Password</p>\r\n      <input name='password' [(ngModel)]='password' type='password' class='form-control' placeholder='Please Enter A Password'>\r\n      <br/>\r\n      <p>Verify Password</p>\r\n      <input name='conf_password' [(ngModel)]='conf_password' type='password' class='form-control' placeholder='Verify Baby!'>\r\n      <br/>\r\n      <br/>\r\n      <button type='submit' class='btn btn-primary btn-block'>Register</button>\r\n    </form>\r\n    <br/>\r\n    <form (ngSubmit) = \"registerCompany()\" #g=\"ngForm\">\r\n      <input name='username' [(ngModel)]='username' type='text' class='form-control' placeholder='Please Enter A Username'>\r\n      <br/>\r\n      <input name='firstName' [(ngModel)]='firstName' type='text' class='form-control' placeholder='Please Enter Your First Name'>\r\n      <br/>\r\n      <input name='lastName' [(ngModel)]='lastName' type='text' class='form-control' placeholder='Please Enter Your Last Name'>\r\n      <br/>\r\n      <input name='password' [(ngModel)]='password' type='password' class='form-control' placeholder='Please Enter A Password'>\r\n      <br/>\r\n      <input name='conf_password' [(ngModel)]='conf_password' type='password' class='form-control' placeholder='Verify Baby!'>\r\n      <br/>\r\n      <br/>\r\n      <button type='submit' class='btn btn-primary btn-block'>Register</button>\r\n    </form>\r\n    <br/>\r\n    <a [routerLink]=\"['/login']\"><button type='button' class='btn btn-danger btn-block'>Cancel</button></a>\r\n  </div>\r\n  <br/>\r\n  <br/>\r\n</div>\r\n"
+module.exports = "<div class=\"container\">\r\n  <nav class=\"navbar navbar-default\">\r\n    <div class=\"navbar-header\">\r\n      <img [routerLink]=\"['/']\" class='navbar-image' src='/assets/images/logo.png'>\r\n    </div>\r\n  </nav>\r\n  <hr/>\r\n  <div class='login__container'>\r\n    <div *ngIf=\"errorFlag\"\r\n      class=\"alert alert-danger\">\r\n      Please fill out all fields. All Fields are required\r\n    </div>\r\n    <h1>Register as a:</h1>\r\n    <div *ngIf=\"isDesigner\" class=\"row\">\r\n      <div class=\"col-6 bg-primary\">\r\n        <a (click)=\"isDesigner = true\">Designer</a>\r\n      </div>\r\n      <div class=\"col-6\">\r\n        <a (click)=\"isDesigner = false\">Company</a>\r\n      </div>\r\n    </div>\r\n    <div *ngIf=\"!isDesigner\" class=\"row\">\r\n      <div class=\"col-6\">\r\n        <a (click)=\"isDesigner = true\">Designer</a>\r\n      </div>\r\n      <div class=\"col-6 bg-primary\">\r\n        <a (click)=\"isDesigner = false\">Company</a>\r\n      </div>\r\n    </div>\r\n    <br>\r\n    <form *ngIf=\"isDesigner\" (ngSubmit) = \"register()\" #f=\"ngForm\">\r\n      <input name='username' [(ngModel)]='username' type='text' class='form-control' placeholder='Please Enter A Username'>\r\n      <br/>\r\n      <input name='firstName' [(ngModel)]='firstName' type='text' class='form-control' placeholder='Please Enter Your First Name'>\r\n      <br/>\r\n      <input name='lastName' [(ngModel)]='lastName' type='text' class='form-control' placeholder='Please Enter Your Last Name'>\r\n      <br/>\r\n      <input name='password' [(ngModel)]='password' type='password' class='form-control' placeholder='Please Enter A Password'>\r\n      <br/>\r\n      <input name='conf_password' [(ngModel)]='conf_password' type='password' class='form-control' placeholder='Verify Baby!'>\r\n      <br/>\r\n      <br/>\r\n      <button type='submit' class='btn btn-primary btn-block'>Register</button>\r\n    </form>\r\n    <form *ngIf=\"!isDesigner\" (ngSubmit) = \"registerCompany()\" #g=\"ngForm\">\r\n      <input name='username' [(ngModel)]='username' type='text' class='form-control' placeholder='Please Enter Your Company Name'>\r\n      <br/>\r\n      <input name='firstName' [(ngModel)]='firstName' type='text' class='form-control' placeholder='Please Enter Your First Name'>\r\n      <br/>\r\n      <input name='lastName' [(ngModel)]='lastName' type='text' class='form-control' placeholder='Please Enter Your Last Name'>\r\n      <br/>\r\n      <input name='password' [(ngModel)]='password' type='password' class='form-control' placeholder='Please Enter A Password'>\r\n      <br/>\r\n      <input name='conf_password' [(ngModel)]='conf_password' type='password' class='form-control' placeholder='Verify Baby!'>\r\n      <br/>\r\n      <br/>\r\n      <button type='submit' class='btn btn-primary btn-block'>Register</button>\r\n    </form>\r\n    <br/>\r\n    <a [routerLink]=\"['/login']\"><button type='button' class='btn btn-danger btn-block'>Cancel</button></a>\r\n  </div>\r\n  <br/>\r\n  <br/>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1374,6 +1374,7 @@ var RegisterComponent = (function () {
         this.sharedService = sharedService;
         this.userService = userService;
         this.router = router;
+        this.isDesigner = true;
     }
     RegisterComponent.prototype.ngOnInit = function () {
     };
@@ -1725,6 +1726,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var AuthenticationService = (function () {
     function AuthenticationService(userService) {
         this.userService = userService;
+        this.api = {
+            'canActivate': this.canActivate
+        };
     }
     AuthenticationService.prototype.canActivate = function () {
         return this.userService.loggedIn();
@@ -1766,6 +1770,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var BoardService = (function () {
     function BoardService(_http) {
         this._http = _http;
+        this.api = {
+            'createBoard': this.createBoard,
+            'findBoardByUser': this.findBoardsByUser,
+            'findBoardById': this.findBoardById,
+            'updateBoard': this.updateBoard,
+            'deleteBoard': this.deleteBoard,
+            'getRandomBoardCollection': this.getRandomBoardCollection,
+            'seachBoards': this.searchBoards
+        };
         this.baseUrl = __WEBPACK_IMPORTED_MODULE_1__environments_environment__["a" /* environment */].baseUrl;
     }
     BoardService.prototype.createBoard = function (userId) {
@@ -1921,6 +1934,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var FlickrService = (function () {
     function FlickrService(_http) {
         this._http = _http;
+        this.api = {
+            'searchPhotos': this.searchPhotos
+        };
         this.key = "f9538dbe339cc25946f629d74f993897";
         this.secret = "5e41cb0989a36856";
         this.urlBase = "https://api.flickr.com/services/rest/?method=flickr.photos.search&format=json&api_key=API_KEY&text=TEXT";
@@ -2041,6 +2057,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 var SharedService = (function () {
     function SharedService() {
+        this.api = {};
         this.user = {};
     }
     return SharedService;
@@ -2085,6 +2102,18 @@ var UserService = (function () {
         this._http = _http;
         this.sharedService = sharedService;
         this.router = router;
+        this.api = {
+            'loggedIn': this.loggedIn,
+            'login': this.login,
+            'logout': this.logout,
+            'register': this.register,
+            'findUserByUsername': this.findUserByUsername,
+            'findUserByCredentials': this.findUserByCredentials,
+            'findUserById': this.findUserById,
+            'updateUser': this.updateUser,
+            'deleteUser': this.deleteUser,
+            'searchUsers': this.searchUsers
+        };
         this.baseUrl = __WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].baseUrl;
         this.options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* RequestOptions */]();
     }
@@ -2125,12 +2154,6 @@ var UserService = (function () {
     UserService.prototype.register = function (user) {
         this.options.withCredentials = true;
         return this._http.post(this.baseUrl + '/api/register', user, this.options)
-            .map(function (res) {
-            return res.json();
-        });
-    };
-    UserService.prototype.createUser = function (user) {
-        return this._http.post(this.baseUrl + '/api/user', user)
             .map(function (res) {
             return res.json();
         });
