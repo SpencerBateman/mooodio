@@ -20,6 +20,9 @@
           <div (click)="deleteUser(foundUser['_id'])" class='board-x'>
             <i class='fa fa-times'></i>
           </div>
+          <div [routerLink]="['/adminEdit', foundUser['_id']]">
+            Edit
+          </div>
         </div>
       </div>
     </li>

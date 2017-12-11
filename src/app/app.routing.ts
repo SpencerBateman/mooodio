@@ -9,10 +9,12 @@ import { BoardComponent } from './components/board/board.component';
 import {ViewProfileComponent} from './components/user/view-profile/view-profile.component';
 import {SearchUsersComponent} from './components/search-users/search-users.component';
 import {AdminComponent} from './components/admin/admin.component';
+import {AdminUserEditComponent} from './components/admin-user-edit/admin-user-edit.component';
 
 const APP_ROUTES: Routes = [
   {path: '', component: HomeComponent},
   {path: 'admin', component: AdminComponent},
+  {path: 'adminEdit/:viewedUserId', component: AdminUserEditComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'board/:boardId', component: BoardComponent},

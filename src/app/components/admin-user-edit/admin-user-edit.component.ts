@@ -90,6 +90,7 @@ export class AdminUserEditComponent implements OnInit {
     curFolloweds.splice(curFolloweds.indexOf(followed['_id']), 1);
     this.viewedUser['following'] = curFolloweds;
     this.userService.updateUser(this.viewedUserId, this.viewedUser).subscribe((data: any) => {
+      this.viewedUser = data;
       const tmp = followed['followedBy'];
       tmp.splice(tmp.indexOf(this.viewedUserId), 1);
       followed['followedBy'] = tmp;
@@ -113,9 +114,10 @@ export class AdminUserEditComponent implements OnInit {
     curFollowers.splice(curFollowers.indexOf(follower['_id']), 1);
     this.viewedUser['followedBy'] = curFollowers;
     this.userService.updateUser(this.viewedUserId, this.viewedUser).subscribe((data: any) => {
+      this.viewedUser = data;
       const tmp = follower['followers'];
       tmp.splice(tmp.indexOf(this.viewedUserId), 1);
-      follower['followers'] = tmp;
+      follower['following'] = tmp;
       this.userService.updateUser(follower['_id'], follower).subscribe((res: any) => {
         this.getFollowerProfiles();
       });
@@ -136,6 +138,7 @@ export class AdminUserEditComponent implements OnInit {
     curCompanies.splice(curCompanies.indexOf(company['_id']), 1);
     this.viewedUser['companies'] = curCompanies;
     this.userService.updateUser(this.viewedUserId, this.viewedUser).subscribe((data: any) => {
+      this.viewedUser = data;
       const tmp = company['designers'];
       tmp.splice(tmp.indexOf(this.viewedUserId), 1);
       company['designers'] = tmp;
@@ -159,6 +162,7 @@ export class AdminUserEditComponent implements OnInit {
     curDesigners.splice(curDesigners.indexOf(designer['_id']), 1);
     this.viewedUser['designers'] = curDesigners;
     this.userService.updateUser(this.viewedUserId, this.viewedUser).subscribe((data: any) => {
+      this.viewedUser = data;
       const tmp = designer['companies'];
       tmp.splice(tmp.indexOf(this.viewedUserId), 1);
       designer['companies'] = tmp;

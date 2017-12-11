@@ -27,7 +27,7 @@
       <h2>Companies</h2>
       <li class='company__preview' *ngFor="let company of companies" >
         <h3 [routerLink]="['/profile/', company['_id']]">{{company['username']}}</h3>
-        <div (click)="removeCompany(company['_id'])" class='board-x'>
+        <div (click)="removeCompany(company)" class='board-x'>
           <i class='fa fa-times'></i>
         </div>
       </li>
@@ -38,7 +38,7 @@
     <ul>
       <li *ngFor="let followed of following">
         <h3 [routerLink]="['/profile/', followed['_id']]">{{followed['username']}}</h3>
-        <div (click)="removeFollowed(followed['_id'])" class='board-x'>
+        <div (click)="removeFollowed(followed)" class='board-x'>
           <i class='fa fa-times'></i>
         </div>
       </li>
@@ -60,7 +60,7 @@
     <ul>
       <li *ngFor="let designer of designers">
         <h3 [routerLink]="['/profile/', designer['_id']]">{{designer['username']}}</h3>
-        <div (click)="removeDesigner(designer['_id'])" class='board-x'>
+        <div (click)="removeDesigner(designer)" class='board-x'>
           <i class='fa fa-times'></i>
         </div>
       </li>

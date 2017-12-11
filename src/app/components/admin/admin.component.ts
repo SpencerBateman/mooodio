@@ -25,6 +25,7 @@ export class AdminComponent implements OnInit {
   ngOnInit() {
     this.user = this.sharedService.user || {};
     this.searchContext = 'USERS';
+    this.searchTarget = 'DESIGNER';
   }
 
   search() {
