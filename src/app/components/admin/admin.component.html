@@ -3,11 +3,12 @@
     <button class="col-3 btn" (click)="searchDesigners()">Designers</button>
     <button class="col-3 btn" (click)="searchCompanies()">Companies</button>
     <button class="col-3 btn" (click)="searchBoards()">Boards</button>
-    <button class="col-3 btn" [routerLink]="['/profile']">Back to Profile</button>
+    <button class="col-3 btn" [routerLink]="['/profile']">Home</button>
   </div>
   <div class="row">
-    <input id='searchTerm' name='searchTerm' [(ngModel)]='searchTerm' type='text' class='col-9 form-control'>
+    <input id='searchTerm' name='searchTerm' [(ngModel)]='searchTerm' type='text' class='col-6 form-control'>
     <button (click)="search()" class="btn btn-primary btn-block col-3">Search</button>
+    <button class="col-3 btn" (click)="createUser()">Create User</button>
   </div>
 
   <ul *ngIf="searchContext === 'USERS'" class="list-group">
