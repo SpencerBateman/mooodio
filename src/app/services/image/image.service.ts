@@ -62,8 +62,8 @@ export class ImageService {
       );
   }
 
-  deleteImage(imageId: string) {
-    return this._http.delete(this.baseUrl + '/api/image/' + imageId)
+  deleteImage(imageId: string, boardId: any) {
+    return this._http.delete(this.baseUrl + '/api/image/' + imageId + '/' + boardId)
       .map(
         (res: Response) => {
           return res.json();

@@ -7,7 +7,6 @@
         <h2>Flickr</h2>
         <input [(ngModel)]="searchText" name="searchText" type='text' class='form-control' placeholder='Search Query'>
         <a (click)="searchPhotos()"><button class="btn btn-primary">SEARCH</button></a>
-
         <div class='container'>
           <div class="row">
             <div *ngFor = "let pic of flickrPhotos['photo']" class="col-3">
@@ -25,10 +24,13 @@
   <div class='board' id='board'>
     <div class='board__name'>
       <input *ngIf="editingName" [(ngModel)]="board['name']">
-      <h2 *ngIf="!editingName" (click)="editName()">{{board['name']}}</h2>
+      <h2 class='board__name--h2' *ngIf="!editingName" (click)="editName()">{{board['name']}}</h2>
       <div *ngIf="editingName" (click)="saveName()" ><i class="fa fa-edit fa-2x pull-right"></i></div>
     </div>
     <div *ngFor="let photo of photos" draggable [ngStyle]="{'left': photo.left, 'top': photo.top}" (newPosition)="savePosition($event)" class='board__photo' data-id='{{photo._id}}'>
+      <div class='photo-x' (click)="deletePhoto(photo)">
+        <i class='fa fa-times'></i>
+      </div>
       <img src={{photo.url}}>
     </div>
   </div>

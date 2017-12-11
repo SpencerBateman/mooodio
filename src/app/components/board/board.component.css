@@ -1,0 +1,12 @@
+.board__name--h2:hover {
+}
+
+.photo-x {
+  width: 20px;
+  height: 20px;
+  background: red;
+  display: inline-block;
+  position: absolute ;
+  right: 0;
+  color: white;
+}
