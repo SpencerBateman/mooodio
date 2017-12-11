@@ -33,6 +33,7 @@ app.use(function(req, res, next) {
 
 const port = process.env.PORT || '3100';
 app.set('port', port);
+app.use(express.static('./src'));
 
 
 // Create HTTP server
