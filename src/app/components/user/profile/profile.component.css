@@ -1,5 +1,6 @@
 .board__preview h3 {
   display: inline-block;
+  opacity: .6;
 }
 
 .board__preview {
