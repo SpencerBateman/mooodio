@@ -20,11 +20,18 @@
     <input id='searchTerm' name='searchTerm' [(ngModel)]='searchTerm' type='text' class='form-control' placeholder='Please Enter A Username'>
     <button (click)="searchUsers()" class="btn btn-primary btn-block">Search</button>
   </div>
-  <div class="container">
-    <div *ngFor="let foundUser of users" class="row">
-      <a [routerLink]="['path']">{{foundUser['username']}}</a>
-    </div>
-  </div>
+
+  <ul class="list-group">
+    <li *ngFor="let foundUser of users" class="list-group-item">
+      <div class="row">
+        <div class="col-12">
+          <a [routerLink]="['/profile', foundUser['_id']]">
+            {{foundUser['username']}}
+          </a>
+        </div>
+      </div>
+    </li>
+  </ul>
 </div>
 
 <!-- Footer -->
