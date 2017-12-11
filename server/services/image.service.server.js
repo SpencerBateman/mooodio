@@ -89,11 +89,14 @@ module.exports = function(app) {
 
     await boardModel.updateBoard(boardId, board);
 
-    imageModel.findImageById(imageId).then(function (err, doc) {
-      if (!doc) {
-        res.json({});
-      }
+    imageModel.deleteImage(imageId).then(function(err, doc) {
+      imageModel.findImageById(imageId).then(function (err, doc) {
+        if (!doc) {
+          res.json({});
+        }
+      });
     });
+
   }
 
   function uploadImage(req, res) {

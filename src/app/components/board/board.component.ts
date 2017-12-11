@@ -115,6 +115,9 @@ export class BoardComponent implements OnInit {
       this.boardService.findBoardById(this.boardId).subscribe((board: any) => {
         this.board = board;
       });
+      this.imageService.findImagesByBoardId(this.boardId).subscribe((images: any) => {
+        this.photos = images;
+      });
     });
   }
 
