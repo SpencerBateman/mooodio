@@ -40,4 +40,8 @@ function deleteUser(userId) {
   return UserModel.deleteOne(query);
 }
 
+function searchUsers(name) {
+  return UserModel.find({username: {$regex: /name/}});
+}
+
 module.exports = UserModel;
