@@ -8,7 +8,8 @@ module.exports = function(app) {
     'findBoardById'     : this.findBoardById,
     'updateBoard'       : this.updateBoard,
     'deleteBoard'       : this.deleteBoard,
-    'searchBoards'      : this.searchBoards
+    'searchBoards'      : this.searchBoards,
+    'getAllBoards'      : this.getAllBoards
   };
 
   app.get('/api/board/search', searchBoards);

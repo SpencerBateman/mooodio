@@ -11,7 +11,8 @@ module.exports = function(app) {
     'findImagesByBoardId'  : this.findImagesByBoardId,
     'findImageById'     : this.findImageById,
     'updateImage'       : this.updateImage,
-    'deleteImage'       : this.deleteImage
+    'deleteImage'       : this.deleteImage,
+    'uploadImage'       : this.uploadImage
   };
 
   app.post('/api/board/:boardId/image', createImage);
@@ -20,20 +21,6 @@ module.exports = function(app) {
   app.put('/api/image/:imageId', updateImage);
   app.delete('/api/image/:imageId/:boardId', deleteImage);
   app.post("/api/upload", upload.single('myFile'), uploadImage);
-  app.put('/api/board/:boardId/image', updateImageOrder);
-
-  async function updateImageOrder(req, res) {
-    let start = req.query['start'];
-    let end = req.query['end'];
-    let boardId = req.params['boardId'];
-
-    let board = await boardModel.findBoardById(boardId);
-    let images = board.images;
-    images.splice(end, 0, images.splice(start, 1)[0]);
-    board.images = images;
-    let newBoard = await boardModel.updateBoard(boardId, board);
-    res.json(newBoard);
-  }
 
   function createImage(req, res) {
     let boardId = req.params['boardId'];
