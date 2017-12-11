@@ -69,7 +69,7 @@ export class BoardComponent implements OnInit {
       val = val.replace('jsonFlickrApi(', '');
       val = val.substring(0, val.length - 1);
       val = JSON.parse(val);
-      const photoList = val.photos;
+      let photoList = val.photos;
       photoList.photo = photoList.photo.slice(0, 16);
       this.flickrPhotos = photoList;
     });
@@ -85,6 +85,8 @@ export class BoardComponent implements OnInit {
       });
       this.imageService.findImagesByBoardId(this.boardId).subscribe((images: any) => {
         this.photos = images;
+        this.searchText = '';
+        this.flickrPhotos = null;
         this.disableOverlay();
       });
     });
