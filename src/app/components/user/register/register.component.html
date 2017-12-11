@@ -27,6 +27,20 @@
       <button type='submit' class='btn btn-primary btn-block'>Register</button>
     </form>
       <br/>
+    <form (ngSubmit) = "registerCompany()" #g="ngForm">
+      <input name='username' [(ngModel)]='username' type='text' class='form-control' placeholder='Please Enter A Username'>
+      <br/>
+      <input name='firstName' [(ngModel)]='firstName' type='text' class='form-control' placeholder='Please Enter Your First Name'>
+      <br/>
+      <input name='lastName' [(ngModel)]='lastName' type='text' class='form-control' placeholder='Please Enter Your Last Name'>
+      <br/>
+      <input name='password' [(ngModel)]='password' type='password' class='form-control' placeholder='Please Enter A Password'>
+      <br/>
+      <input name='conf_password' [(ngModel)]='conf_password' type='password' class='form-control' placeholder='Verify Baby!'>
+      <br/>
+      <br/>
+      <button type='submit' class='btn btn-primary btn-block'>Register</button>
+    </form>
     <a [routerLink]="['/login']"><button type='button' class='btn btn-danger btn-block'>Cancel</button></a>
   </div>
 </div>

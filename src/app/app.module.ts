@@ -19,6 +19,7 @@ import { DraggableDirective } from './directives/draggable.directive';
 import { ViewProfileComponent } from './components/user/view-profile/view-profile.component';
 import {CommentService} from './services/comment.service.client';
 import { SearchUsersComponent } from './components/search-users/search-users.component';
+import { CompanyComponent } from './company/company.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { SearchUsersComponent } from './components/search-users/search-users.com
     BoardComponent,
     DraggableDirective,
     ViewProfileComponent,
-    SearchUsersComponent
+    SearchUsersComponent,
+    CompanyComponent
   ],
   imports: [
     BrowserModule,

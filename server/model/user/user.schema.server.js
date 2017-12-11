@@ -9,7 +9,9 @@ let UserSchema = mongoose.Schema({
   boards: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Board'}],
   following: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
   followedBy: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
-  role: { type: String, enum: ['DESIGNER', 'COMPANY', 'ADMIN'] },
+  companies: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
+  role: { type: String, enum: ['DESIGNER', 'COMPANY', 'ADMIN']},
+  designers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
   dateCreated: { type: Date, default: Date.now }
 }, {collection: 'user'});
 
