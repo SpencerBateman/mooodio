@@ -59,5 +59,14 @@ export class ProfileComponent implements OnInit {
       );
   }
 
+  deleteBoard(board) {
+    console.log('trying to delete');
+    this.boardService.deleteBoard(board._id).subscribe(() => {
+      this.boardService.findBoardsByUser(this.userId).subscribe((boards) => {
+        this.boards = boards;
+      });
+    });
+  }
+
 }
 

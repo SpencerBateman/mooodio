@@ -1,0 +1,12 @@
+.board__preview h3 {
+  display: inline-block;
+}
+
+.board__preview {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.board__preview i {
+  display: block;
+}
