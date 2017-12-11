@@ -892,7 +892,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/home/home.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n  <img src='/assets/images/logo.png'>\r\n  <div class='padding'></div>\r\n  <div class='board__box--container'>\r\n    <div class='board__box' *ngFor=\"let board of boards\">\r\n      <p>{{board.name}}</p>\r\n    </div>\r\n  </div>\r\n  <div class='padding'></div>\r\n  <button class='btn btn-primary btn-block' [routerLink]=\"['/login']\">Get Started</button>\r\n  <div class='padding'></div>\r\n</div>\r\n\r\n"
+module.exports = "<div class=\"container\">\r\n  <img src='/assets/images/logo.png'>\r\n  <div class='padding'></div>\r\n  <div class='board__box--container'>\r\n    <div [routerLink]=\"['/board', board['_id']]\" class='board__box' *ngFor=\"let board of boards\">\r\n      <p>{{board.name}}</p>\r\n    </div>\r\n  </div>\r\n  <div class='padding'></div>\r\n  <button class='btn btn-primary btn-block' [routerLink]=\"['/login']\">Get Started</button>\r\n  <div class='padding'></div>\r\n</div>\r\n\r\n"
 
 /***/ }),
 
