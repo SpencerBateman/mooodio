@@ -5,6 +5,17 @@ import 'rxjs/Rx';
 
 @Injectable()
 export class BoardService {
+
+  api = {
+    'createBoard'              : this.createBoard,
+    'findBoardByUser'          : this.findBoardsByUser,
+    'findBoardById'            : this.findBoardById,
+    'updateBoard'              : this.updateBoard,
+    'deleteBoard'              : this.deleteBoard,
+    'getRandomBoardCollection' : this.getRandomBoardCollection,
+    'seachBoards'              : this.searchBoards
+  };
+
   constructor(private _http: Http) {}
 
   baseUrl = environment.baseUrl;

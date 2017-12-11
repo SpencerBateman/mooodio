@@ -4,7 +4,13 @@ import {UserService} from './user.service.client';
 
 @Injectable()
 export class AuthenticationService implements CanActivate {
+
+  api: {} = {
+    'canActivate': this.canActivate
+  };
+
  constructor(private userService: UserService) {}
+
  canActivate() {
    return this.userService.loggedIn();
  }
