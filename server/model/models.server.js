@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-let connectionString = 'mongodb://localhost/cs5610'; // for local
+let connectionString = 'mongodb://localhost/mooodio'; // for local
 if(process.env.MLAB_USERNAME_WEBDEV) { // check if running remotely
   let username = process.env.MLAB_USERNAME_WEBDEV; // get from environment
   let password = process.env.MLAB_PASSWORD_WEBDEV;
