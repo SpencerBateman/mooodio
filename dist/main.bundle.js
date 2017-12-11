@@ -91,12 +91,14 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__directives_draggable_directive__ = __webpack_require__("../../../../../src/app/directives/draggable.directive.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_user_view_profile_view_profile_component__ = __webpack_require__("../../../../../src/app/components/user/view-profile/view-profile.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__services_comment_service_client__ = __webpack_require__("../../../../../src/app/services/comment.service.client.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__components_search_users_search_users_component__ = __webpack_require__("../../../../../src/app/components/search-users/search-users.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -133,7 +135,8 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_9__components_user_profile_profile_component__["a" /* ProfileComponent */],
             __WEBPACK_IMPORTED_MODULE_13__components_board_board_component__["a" /* BoardComponent */],
             __WEBPACK_IMPORTED_MODULE_17__directives_draggable_directive__["a" /* DraggableDirective */],
-            __WEBPACK_IMPORTED_MODULE_18__components_user_view_profile_view_profile_component__["a" /* ViewProfileComponent */]
+            __WEBPACK_IMPORTED_MODULE_18__components_user_view_profile_view_profile_component__["a" /* ViewProfileComponent */],
+            __WEBPACK_IMPORTED_MODULE_20__components_search_users_search_users_component__["a" /* SearchUsersComponent */]
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -172,6 +175,8 @@ AppModule = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_authentication_service_client__ = __webpack_require__("../../../../../src/app/services/authentication.service.client.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_board_board_component__ = __webpack_require__("../../../../../src/app/components/board/board.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_user_view_profile_view_profile_component__ = __webpack_require__("../../../../../src/app/components/user/view-profile/view-profile.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_search_users_search_users_component__ = __webpack_require__("../../../../../src/app/components/search-users/search-users.component.ts");
+
 
 
 
@@ -186,7 +191,8 @@ var APP_ROUTES = [
     { path: 'register', component: __WEBPACK_IMPORTED_MODULE_4__components_user_register_register_component__["a" /* RegisterComponent */] },
     { path: 'board/:boardId', component: __WEBPACK_IMPORTED_MODULE_6__components_board_board_component__["a" /* BoardComponent */] },
     { path: 'profile', component: __WEBPACK_IMPORTED_MODULE_3__components_user_profile_profile_component__["a" /* ProfileComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_5__services_authentication_service_client__["a" /* AuthenticationService */]] },
-    { path: 'profile/:viewedUserId', component: __WEBPACK_IMPORTED_MODULE_7__components_user_view_profile_view_profile_component__["a" /* ViewProfileComponent */] }
+    { path: 'profile/:viewedUserId', component: __WEBPACK_IMPORTED_MODULE_7__components_user_view_profile_view_profile_component__["a" /* ViewProfileComponent */] },
+    { path: 'searchUsers', component: __WEBPACK_IMPORTED_MODULE_8__components_search_users_search_users_component__["a" /* SearchUsersComponent */] }
 ];
 // Export the routes as module providers
 var Routing = __WEBPACK_IMPORTED_MODULE_0__angular_router__["c" /* RouterModule */].forRoot(APP_ROUTES);
@@ -202,7 +208,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".board__name--h2:hover {\n}\n\n.photo-x {\n  width: 20px;\n  height: 20px;\n  background: red;\n  display: inline-block;\n  position: absolute ;\n  right: 0;\n  color: white;\n}\n", ""]);
+exports.push([module.i, ".board__name--h2:hover {\r\n}\r\n\r\n.photo-x {\r\n  width: 20px;\r\n  height: 20px;\r\n  background: red;\r\n  display: inline-block;\r\n  position: absolute ;\r\n  right: 0;\r\n  color: white;\r\n}\r\n", ""]);
 
 // exports
 
@@ -215,7 +221,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/board/board.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class='container'>\n  <div *ngIf='isSearching' class='searchOverlay'>\n    <div class='flickr-background'>\n    </div>\n    <div class='container'>\n      <div class='flickr-box'>\n        <h2>Flickr</h2>\n        <input [(ngModel)]=\"searchText\" name=\"searchText\" type='text' class='form-control' placeholder='Search Query'>\n        <a (click)=\"searchPhotos()\"><button class=\"btn btn-primary\">SEARCH</button></a>\n        <div class='container'>\n          <div class=\"row\">\n            <div *ngFor = \"let pic of flickrPhotos['photo']\" class=\"col-3\">\n              <img (click)=\"selectPhoto(pic)\"\n              width=\"100%\"\n              [src]=\"['https://farm' + pic.farm + '.staticflickr.com/' + pic.server + '/' +   pic.id + '_' + pic.secret + '_s.jpg']\"/>\n              <p></p>\n            </div>\n          </div>\n        </div>\n        <button (click)=\"disableOverlay()\" class='btn btn-danger btn-block'>Cancel</button>\n      </div>\n    </div>\n  </div>\n  <div class='board' id='board'>\n    <div class='board__name'>\n      <input *ngIf=\"editingName\" [(ngModel)]=\"board['name']\">\n      <h2 class='board__name--h2' *ngIf=\"!editingName\" (click)=\"editName()\">{{board['name']}}</h2>\n      <div *ngIf=\"editingName\" (click)=\"saveName()\" ><i class=\"fa fa-save fa-2x pull-right\"></i></div>\n    </div>\n    <div *ngFor=\"let photo of photos\" draggable [ngStyle]=\"{'left': photo.left, 'top': photo.top}\" (newPosition)=\"savePosition($event)\" class='board__photo' data-id='{{photo._id}}'>\n      <div class='photo-x' (click)=\"deletePhoto(photo)\">\n        <i class='fa fa-times'></i>\n      </div>\n      <img src={{photo.url}}>\n    </div>\n  </div>\n  <button (click)=\"enableOverlay()\" class='btn btn-primary btn-block'>Search Flickr</button>\n  <div class=\"mooodio-comment-container container-fluid\">\n    <div *ngFor=\"let comment of comments\" class=\"row\">\n      <!--<span>{{comment['authorName']}}</span>-->\n      <span>{{comment['text']}}</span>\n    </div>\n  </div>\n  <div *ngIf=\"editingComment\" class=\"comment-field\">\n    <input [(ngModel)]=\"commentText\"\n           name=\"commentText\"\n           type=\"text\"\n           class=\"form-control\"\n           id=\"commentText\"\n           placeholder=\"Write a comment\">\n    <button (click)=\"createComment()\" class=\"btn btn-block\">Submit</button>\n  </div>\n  <button (click)=\"editingComment = true\" class=\"btn btn-secondary btn-block\">Comment</button>\n</div>\n\n"
+module.exports = "<div class='container'>\r\n  <div *ngIf='isSearching' class='searchOverlay'>\r\n    <div class='flickr-background'>\r\n    </div>\r\n    <div class='container'>\r\n      <div class='flickr-box'>\r\n        <h2>Flickr</h2>\r\n        <input [(ngModel)]=\"searchText\" name=\"searchText\" type='text' class='form-control' placeholder='Search Query'>\r\n        <a (click)=\"searchPhotos()\"><button class=\"btn btn-primary\">SEARCH</button></a>\r\n        <div class='container'>\r\n          <div class=\"row\">\r\n            <div *ngFor = \"let pic of flickrPhotos['photo']\" class=\"col-3\">\r\n              <img (click)=\"selectPhoto(pic)\"\r\n              width=\"100%\"\r\n              [src]=\"['https://farm' + pic.farm + '.staticflickr.com/' + pic.server + '/' +   pic.id + '_' + pic.secret + '_s.jpg']\"/>\r\n              <p></p>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <button (click)=\"disableOverlay()\" class='btn btn-danger btn-block'>Cancel</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class='board' id='board'>\r\n    <div class='board__name'>\r\n      <input *ngIf=\"editingName\" [(ngModel)]=\"board['name']\">\r\n      <h2 class='board__name--h2' *ngIf=\"!editingName\" (click)=\"editName()\">{{board['name']}}</h2>\r\n      <div *ngIf=\"editingName\" (click)=\"saveName()\" ><i class=\"fa fa-save fa-2x pull-right\"></i></div>\r\n    </div>\r\n    <div *ngFor=\"let photo of photos\" draggable [ngStyle]=\"{'left': photo.left, 'top': photo.top}\" (newPosition)=\"savePosition($event)\" class='board__photo' data-id='{{photo._id}}'>\r\n      <div class='photo-x' (click)=\"deletePhoto(photo)\">\r\n        <i class='fa fa-times'></i>\r\n      </div>\r\n      <img src={{photo.url}}>\r\n    </div>\r\n  </div>\r\n  <button (click)=\"enableOverlay()\" class='btn btn-primary btn-block'>Search Flickr</button>\r\n  <div class=\"mooodio-comment-container container-fluid\">\r\n    <div *ngFor=\"let comment of comments\" class=\"row\">\r\n      <!--<span>{{comment['authorName']}}</span>-->\r\n      <span>{{comment['text']}}</span>\r\n    </div>\r\n  </div>\r\n  <div *ngIf=\"editingComment\" class=\"comment-field\">\r\n    <input [(ngModel)]=\"commentText\"\r\n           name=\"commentText\"\r\n           type=\"text\"\r\n           class=\"form-control\"\r\n           id=\"commentText\"\r\n           placeholder=\"Write a comment\">\r\n    <button (click)=\"createComment()\" class=\"btn btn-block\">Submit</button>\r\n  </div>\r\n  <button (click)=\"editingComment = true\" class=\"btn btn-secondary btn-block\">Comment</button>\r\n</div>\r\n\r\n"
 
 /***/ }),
 
@@ -377,7 +383,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "img {\n  display: block;\n  width: 100%;\n}\n", ""]);
+exports.push([module.i, "img {\r\n  display: block;\r\n  width: 100%;\r\n}\r\n\r\n.board__box--container {\r\n  width: 100%;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-pack: justify;\r\n      -ms-flex-pack: justify;\r\n          justify-content: space-between;\r\n  -ms-flex-wrap: wrap;\r\n      flex-wrap: wrap;\r\n}\r\n\r\n.board__box {\r\n  background: #c1c1c1;\r\n  display: inline-block;\r\n  height: 200px;\r\n  border-radius: 10px;\r\n  width: 30%;\r\n  margin: 15px 10px;\r\n}\r\n\r\np {\r\n  margin: 10px 0 0 10px;\r\n}\r\n", ""]);
 
 // exports
 
@@ -390,7 +396,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/home/home.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <img src='/assets/images/logo.png'>\n  <a [routerLink]=\"['/login']\"><h3>Login</h3></a>\n  <div *ngFor=\"let board of boards\">\n    {{board.name}}\n  </div>\n</div>\n\n"
+module.exports = "<div class=\"container\">\r\n  <img src='/assets/images/logo.png'>\r\n  <div class='padding'></div>\r\n  <div class='board__box--container'>\r\n    <div class='board__box' *ngFor=\"let board of boards\">\r\n      <p>{{board.name}}</p>\r\n    </div>\r\n  </div>\r\n  <div class='padding'></div>\r\n  <button class='btn btn-primary btn-block' [routerLink]=\"['/login']\">Get Started</button>\r\n  <div class='padding'></div>\r\n</div>\r\n\r\n"
 
 /***/ }),
 
@@ -438,6 +444,81 @@ var _a;
 
 /***/ }),
 
+/***/ "../../../../../src/app/components/search-users/search-users.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/search-users/search-users.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<nav class=\"navbar navbar-default navbar-fixed-top\">\r\n  <div class=\"container-fluid\">\r\n    <!--heading on the nav bar-->\r\n    <p class=\"navbar-header pull-left\">\r\n      <a class=\"navbar-brand thick\">\r\n        <b>Profile</b>\r\n      </a>\r\n    </p>\r\n    <!--tick mark-->\r\n    <p class=\"navbar-text pull-right\">\r\n      <a (click)=\"updateProfile()\" class=\"navbar-link\">\r\n        <span class=\"glyphicon glyphicon-ok\"></span>\r\n      </a>\r\n    </p>\r\n  </div>\r\n</nav>\r\n<div class=\"container\">\r\n  <div class=\"row\">\r\n    <label for=\"searchTerm\">Find a user by Username:</label>\r\n    <input id='searchTerm' name='searchTerm' [(ngModel)]='searchTerm' type='text' class='form-control' placeholder='Please Enter A Username'>\r\n    <button (click)=\"searchUsers()\" class=\"btn btn-primary btn-block\">Search</button>\r\n  </div>\r\n  <div class=\"container\">\r\n    <div *ngFor=\"let foundUser of users\" class=\"row\">\r\n      <a [routerLink]=\"['path']\">{{foundUser['username']}}</a>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<!-- Footer -->\r\n<nav class=\"navbar navbar-default navbar-fixed-bottom\">\r\n  <div class=\"container-fluid\">\r\n    <p class=\"navbar-text pull-right\">\r\n      <a [routerLink]=\"['/profile']\">\r\n        <span class=\"glyphicon glyphicon-user\"></span>\r\n      </a>\r\n    </p>\r\n  </div>\r\n</nav>\r\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/search-users/search-users.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SearchUsersComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_user_service_client__ = __webpack_require__("../../../../../src/app/services/user.service.client.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_shared_service_client__ = __webpack_require__("../../../../../src/app/services/shared.service.client.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var SearchUsersComponent = (function () {
+    function SearchUsersComponent(userService, sharedService) {
+        this.userService = userService;
+        this.sharedService = sharedService;
+    }
+    SearchUsersComponent.prototype.ngOnInit = function () {
+        this.user = this.sharedService.user || {};
+    };
+    SearchUsersComponent.prototype.searchUsers = function () {
+        var _this = this;
+        this.userService.searchUsers(this.searchTerm).subscribe(function (res) {
+            _this.users = res;
+        });
+    };
+    return SearchUsersComponent;
+}());
+SearchUsersComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
+        selector: 'app-search-users',
+        template: __webpack_require__("../../../../../src/app/components/search-users/search-users.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/components/search-users/search-users.component.css")]
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_user_service_client__["a" /* UserService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_user_service_client__["a" /* UserService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services_shared_service_client__["a" /* SharedService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_shared_service_client__["a" /* SharedService */]) === "function" && _b || Object])
+], SearchUsersComponent);
+
+var _a, _b;
+//# sourceMappingURL=search-users.component.js.map
+
+/***/ }),
+
 /***/ "../../../../../src/app/components/user/login/login.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -459,7 +540,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/user/login/login.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <nav class=\"navbar navbar-default\">\n    <div class=\"navbar-header\">\n      <img class='navbar-image' src='/assets/images/logo.png'>\n    </div>\n  </nav>\n  <hr/>\n  <div class='login__container'>\n    <div *ngIf=\"errorFlag\"\n      class=\"alert alert-danger\">\n      {{errorMsg}}\n    </div>\n\n    <form (ngSubmit) = \"login()\" #f=\"ngForm\">\n      <h1>Login</h1>\n      <br/>\n      <input name='username' type='text' placeholder='username' class='form-control' required [(ngModel)]=\"username\"/>\n      <br/>\n      <input name='password' type='password' placeholder='password' class='form-control' required [(ngModel)]=\"password\"/>\n      <br/>\n      <br/>\n      <br/>\n      <button type='submit' [disabled]=\"!f.valid\" class='btn btn-primary btn-block'>Login</button>\n    </form>\n    <br/>\n    <a [routerLink]=\"['/register']\">\n      <button type='button' class='btn btn-success btn-block'>Register</button>\n    </a>\n  </div>\n</div>\n"
+module.exports = "<div class=\"container\">\r\n  <nav class=\"navbar navbar-default\">\r\n    <div class=\"navbar-header\">\r\n      <img class='navbar-image' src='/assets/images/logo.png'>\r\n    </div>\r\n  </nav>\r\n  <hr/>\r\n  <div class='login__container'>\r\n    <div *ngIf=\"errorFlag\"\r\n      class=\"alert alert-danger\">\r\n      {{errorMsg}}\r\n    </div>\r\n\r\n    <form (ngSubmit) = \"login()\" #f=\"ngForm\">\r\n      <h1>Login</h1>\r\n      <br/>\r\n      <input name='username' type='text' placeholder='username' class='form-control' required [(ngModel)]=\"username\"/>\r\n      <br/>\r\n      <input name='password' type='password' placeholder='password' class='form-control' required [(ngModel)]=\"password\"/>\r\n      <br/>\r\n      <br/>\r\n      <br/>\r\n      <button type='submit' [disabled]=\"!f.valid\" class='btn btn-primary btn-block'>Login</button>\r\n    </form>\r\n    <br/>\r\n    <a [routerLink]=\"['/register']\">\r\n      <button type='button' class='btn btn-success btn-block'>Register</button>\r\n    </a>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -532,7 +613,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".board__preview h3 {\n  display: inline-block;\n}\n\n.board__preview {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.board__preview i {\n  display: block;\n}\n", ""]);
+exports.push([module.i, ".board__preview h3 {\r\n  display: inline-block;\r\n}\r\n\r\n.board__preview {\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-pack: justify;\r\n      -ms-flex-pack: justify;\r\n          justify-content: space-between;\r\n  -webkit-box-align: center;\r\n      -ms-flex-align: center;\r\n          align-items: center;\r\n}\r\n.board__preview i {\r\n  display: block;\r\n}\r\n", ""]);
 
 // exports
 
@@ -545,7 +626,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/user/profile/profile.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-default navbar-fixed-top\">\n  <div class=\"container-fluid\">\n    <!--heading on the nav bar-->\n    <p class=\"navbar-header pull-left\">\n      <a class=\"navbar-brand thick\">\n        <b>Profile</b>\n      </a>\n    </p>\n    <!--tick mark-->\n    <p class=\"navbar-text pull-right\">\n      <a (click)=\"updateProfile()\" class=\"navbar-link\">\n        <span class=\"glyphicon glyphicon-ok\"></span>\n      </a>\n    </p>\n  </div>\n</nav>\n<div class=\"container\">\n  <div class=\"row\">\n    <label for=\"username\">Username</label>\n    <input [(ngModel)]=\"user.username\"\n    name=\"username\"\n    type=\"text\"\n    class=\"form-control\"\n    id=\"username\"\n    placeholder=\"Alice\">\n    <label for=\"email\">Email address</label>\n    <input type=\"email\"\n    class=\"form-control\"\n    id=\"email\"\n    [(ngModel)]=\"user.email\"\n    placeholder=\"alice.wonderland@unicorn.com\">\n    <label for=\"first-name\">First Name</label>\n    <input [(ngModel)]=\"user.firstName\"\n    name=\"firstName\"\n    type=\"text\"\n    class=\"form-control\"\n    id=\"first-name\"\n    placeholder=\"Alice\">\n    <label for=\"last-name\">Last Name</label>\n    <input [(ngModel)]=\"user.lastName\"\n    name=\"lastName\"\n    type=\"text\"\n    class=\"form-control\"\n    id=\"last-name\"\n    placeholder=\"Wonderland\">\n    <a class=\"btn btn-primary btn-block\"\n      (click)=\"createBoardAndNavigate()\">Create Board</a>\n    <ul class=\"container\">\n      <li class='board__preview' *ngFor=\"let board of boards\" >\n        <h3 [routerLink]=\"['/board/', board._id]\">{{board.name}}</h3>\n        <div (click)=\"deleteBoard(board)\" class='board-x'>\n          <i class='fa fa-times'></i>\n        </div>\n      </li>\n    </ul>\n    <a class=\"btn btn-danger btn-block \"\n      (click)=\"logout()\" >Logout</a>\n    <a [routerLink]=\"['/profile/5a2cc2cab32d48162895f12a']\">\n      GO TO PROFILE\n    </a>\n    <p>Following: {{user['following']}}</p>\n    <p>FollowedBy: {{user['followedBy']}}</p>\n  </div>\n</div>\n\n<!-- Footer -->\n<nav class=\"navbar navbar-default navbar-fixed-bottom\">\n  <div class=\"container-fluid\">\n    <p class=\"navbar-text pull-right\">\n      <a [routerLink]=\"['/profile']\">\n        <span class=\"glyphicon glyphicon-user\"></span>\n      </a>\n    </p>\n  </div>\n</nav>\n"
+module.exports = "<nav class=\"navbar navbar-default navbar-fixed-top\">\r\n  <div class=\"container-fluid\">\r\n    <!--heading on the nav bar-->\r\n    <p class=\"navbar-header pull-left\">\r\n      <a class=\"navbar-brand thick\">\r\n        <b>Profile</b>\r\n      </a>\r\n    </p>\r\n    <!--tick mark-->\r\n    <p class=\"navbar-text pull-right\">\r\n      <a (click)=\"updateProfile()\" class=\"navbar-link\">\r\n        <span class=\"glyphicon glyphicon-ok\"></span>\r\n      </a>\r\n    </p>\r\n  </div>\r\n</nav>\r\n<div class=\"container\">\r\n  <div class=\"row\">\r\n    <label for=\"username\">Username</label>\r\n    <input [(ngModel)]=\"user.username\"\r\n    name=\"username\"\r\n    type=\"text\"\r\n    class=\"form-control\"\r\n    id=\"username\"\r\n    placeholder=\"Alice\">\r\n    <label for=\"email\">Email address</label>\r\n    <input type=\"email\"\r\n    class=\"form-control\"\r\n    id=\"email\"\r\n    [(ngModel)]=\"user.email\"\r\n    placeholder=\"alice.wonderland@unicorn.com\">\r\n    <label for=\"first-name\">First Name</label>\r\n    <input [(ngModel)]=\"user.firstName\"\r\n    name=\"firstName\"\r\n    type=\"text\"\r\n    class=\"form-control\"\r\n    id=\"first-name\"\r\n    placeholder=\"Alice\">\r\n    <label for=\"last-name\">Last Name</label>\r\n    <input [(ngModel)]=\"user.lastName\"\r\n    name=\"lastName\"\r\n    type=\"text\"\r\n    class=\"form-control\"\r\n    id=\"last-name\"\r\n    placeholder=\"Wonderland\">\r\n    <a class=\"btn btn-primary btn-block\"\r\n      (click)=\"createBoardAndNavigate()\">Create Board</a>\r\n    <ul class=\"container\">\r\n      <li class='board__preview' *ngFor=\"let board of boards\" >\r\n        <h3 [routerLink]=\"['/board/', board._id]\">{{board.name}}</h3>\r\n        <div (click)=\"deleteBoard(board)\" class='board-x'>\r\n          <i class='fa fa-times'></i>\r\n        </div>\r\n      </li>\r\n    </ul>\r\n    <a class=\"btn btn-danger btn-block \"\r\n      (click)=\"logout()\" >Logout</a>\r\n    <div class=\"container\">\r\n      <div class=\"row\">\r\n        <div class=\"col-6 following-container\">\r\n          <span class=\"row\">Following:</span>\r\n          <ol>\r\n            <li *ngFor=\"let followed of following\">\r\n              {{followed['username']}}\r\n            </li>\r\n          </ol>\r\n        </div>\r\n        <div class=\"col-6 follower-container\">\r\n          <span class=\"row\">Followers:</span>\r\n          <ol>\r\n            <li *ngFor=\"let follower of followers\">\r\n              {{follower['username']}}\r\n            </li>\r\n          </ol>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <a class=\"btn btn-secondary btn-block\"\r\n       [routerLink]=\"['/searchUsers']\" >Search Users</a>\r\n  </div>\r\n</div>\r\n\r\n<!-- Footer -->\r\n<nav class=\"navbar navbar-default navbar-fixed-bottom\">\r\n  <div class=\"container-fluid\">\r\n    <p class=\"navbar-text pull-right\">\r\n      <a [routerLink]=\"['/profile']\">\r\n        <span class=\"glyphicon glyphicon-user\"></span>\r\n      </a>\r\n    </p>\r\n  </div>\r\n</nav>\r\n"
 
 /***/ }),
 
@@ -591,6 +672,18 @@ var ProfileComponent = (function () {
             _this.boardService.findBoardsByUser(_this.userId).subscribe(function (boards) {
                 _this.boards = boards;
             });
+            _this.following = [];
+            for (var i = 0; i < _this.user['following'].length; i++) {
+                _this.userService.findUserById(_this.user['following'][i]).subscribe(function (res) {
+                    _this.following.push(res);
+                });
+            }
+            _this.followers = [];
+            for (var i = 0; i < _this.user['followedBy'].length; i++) {
+                _this.userService.findUserById(_this.user['followedBy'][i]).subscribe(function (res) {
+                    _this.followers.push(res);
+                });
+            }
         });
     };
     ProfileComponent.prototype.updateProfile = function () {
@@ -658,7 +751,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/user/register/register.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <nav class=\"navbar navbar-default\">\n    <div class=\"navbar-header\">\n      <img class='navbar-image' src='/assets/images/logo.png'>\n    </div>\n  </nav>\n  <hr/>\n  <div class='login__container'>\n    <div *ngIf=\"errorFlag\"\n      class=\"alert alert-danger\">\n      Please fill out all fields. All Fields are required\n    </div>\n    <h1>Register</h1>\n      <br/>\n    <form (ngSubmit) = \"register()\" #f=\"ngForm\">\n      <input name='username' [(ngModel)]='username' type='text' class='form-control' placeholder='Please Enter A Username'>\n      <br/>\n      <input name='firstName' [(ngModel)]='firstName' type='text' class='form-control' placeholder='Please Enter Your First Name'>\n      <br/>\n      <input name='lastName' [(ngModel)]='lastName' type='text' class='form-control' placeholder='Please Enter Your Last Name'>\n      <br/>\n      <input name='password' [(ngModel)]='password' type='password' class='form-control' placeholder='Please Enter A Password'>\n      <br/>\n      <input name='conf_password' [(ngModel)]='conf_password' type='password' class='form-control' placeholder='Verify Baby!'>\n      <br/>\n      <br/>\n      <button type='submit' class='btn btn-primary btn-block'>Register</button>\n    </form>\n      <br/>\n    <a [routerLink]=\"['/login']\"><button type='button' class='btn btn-danger btn-block'>Cancel</button></a>\n  </div>\n</div>\n"
+module.exports = "<div class=\"container\">\r\n  <nav class=\"navbar navbar-default\">\r\n    <div class=\"navbar-header\">\r\n      <img class='navbar-image' src='/assets/images/logo.png'>\r\n    </div>\r\n  </nav>\r\n  <hr/>\r\n  <div class='login__container'>\r\n    <div *ngIf=\"errorFlag\"\r\n      class=\"alert alert-danger\">\r\n      Please fill out all fields. All Fields are required\r\n    </div>\r\n    <h1>Register</h1>\r\n      <br/>\r\n    <form (ngSubmit) = \"register()\" #f=\"ngForm\">\r\n      <input name='username' [(ngModel)]='username' type='text' class='form-control' placeholder='Please Enter A Username'>\r\n      <br/>\r\n      <input name='firstName' [(ngModel)]='firstName' type='text' class='form-control' placeholder='Please Enter Your First Name'>\r\n      <br/>\r\n      <input name='lastName' [(ngModel)]='lastName' type='text' class='form-control' placeholder='Please Enter Your Last Name'>\r\n      <br/>\r\n      <input name='password' [(ngModel)]='password' type='password' class='form-control' placeholder='Please Enter A Password'>\r\n      <br/>\r\n      <input name='conf_password' [(ngModel)]='conf_password' type='password' class='form-control' placeholder='Verify Baby!'>\r\n      <br/>\r\n      <br/>\r\n      <button type='submit' class='btn btn-primary btn-block'>Register</button>\r\n    </form>\r\n      <br/>\r\n    <a [routerLink]=\"['/login']\"><button type='button' class='btn btn-danger btn-block'>Cancel</button></a>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -765,7 +858,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/user/view-profile/view-profile.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-default navbar-fixed-top\">\n  <div class=\"container-fluid\">\n\n    <!--heading on the nav bar-->\n    <p class=\"navbar-header pull-left\">\n      <a class=\"navbar-brand thick\">\n        <b>View Profile</b>\n      </a>\n    </p>\n  </div>\n</nav>\n\n\n<div class=\"container-fluid zlr-main-content-container\">\n  <div class=\"row\">\n    <p>Username: {{viewedUser['username']}}</p>\n    <p>First name: {{viewedUser['firstName']}}</p>\n    <p>Last name: {{viewedUser['lastName']}}</p>\n    <p>Following: {{viewedUser['following']}}</p>\n    <p>Followed by: {{viewedUser['followedBy']}}</p>\n    <a *ngIf=\"!following\" class=\"btn btn-primary btn-block\"\n       (click)=\"follow()\">Follow</a>\n    <a *ngIf=\"following\" class=\"btn btn-primary btn-block\"\n       (click)=\"unfollow()\">Unfollow</a>\n  </div>\n</div>\n<!-- Footer -->\n<nav class=\"navbar navbar-default navbar-fixed-bottom\">\n  <div class=\"container-fluid\">\n    <p class=\"navbar-text pull-right\">\n      <a [routerLink]=\"['/profile']\">\n        <span class=\"glyphicon glyphicon-user\"></span>\n      </a>\n    </p>\n  </div>\n</nav>\n"
+module.exports = "<nav class=\"navbar navbar-default navbar-fixed-top\">\r\n  <div class=\"container-fluid\">\r\n\r\n    <!--heading on the nav bar-->\r\n    <p class=\"navbar-header pull-left\">\r\n      <a class=\"navbar-brand thick\">\r\n        <b>View Profile</b>\r\n      </a>\r\n    </p>\r\n  </div>\r\n</nav>\r\n\r\n\r\n<div class=\"container-fluid zlr-main-content-container\">\r\n  <div class=\"row\">\r\n    <p>Username: {{viewedUser['username']}}</p>\r\n    <p>First name: {{viewedUser['firstName']}}</p>\r\n    <p>Last name: {{viewedUser['lastName']}}</p>\r\n    <p>Following: {{viewedUser['following']}}</p>\r\n    <p>Followed by: {{viewedUser['followedBy']}}</p>\r\n    <a *ngIf=\"!following\" class=\"btn btn-primary btn-block\"\r\n       (click)=\"follow()\">Follow</a>\r\n    <a *ngIf=\"following\" class=\"btn btn-primary btn-block\"\r\n       (click)=\"unfollow()\">Unfollow</a>\r\n  </div>\r\n</div>\r\n<!-- Footer -->\r\n<nav class=\"navbar navbar-default navbar-fixed-bottom\">\r\n  <div class=\"container-fluid\">\r\n    <p class=\"navbar-text pull-right\">\r\n      <a [routerLink]=\"['/profile']\">\r\n        <span class=\"glyphicon glyphicon-user\"></span>\r\n      </a>\r\n    </p>\r\n  </div>\r\n</nav>\r\n"
 
 /***/ }),
 
@@ -1383,6 +1476,12 @@ var UserService = (function () {
         return this._http.delete(this.baseUrl + '/api/user/' + userId)
             .map(function (res) {
             return !res.json();
+        });
+    };
+    UserService.prototype.searchUsers = function (searchTerm) {
+        return this._http.get(this.baseUrl + '/api/user/search?searchTerm=' + searchTerm)
+            .map(function (res) {
+            return res.json();
         });
     };
     return UserService;
