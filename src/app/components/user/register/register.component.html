@@ -10,30 +10,40 @@
       class="alert alert-danger">
       Please fill out all fields. All Fields are required
     </div>
-    <h1>Register</h1>
-    <br/>
-    <form (ngSubmit) = "register()" #f="ngForm">
-      <p>Username</p>
+    <h1>Register as a:</h1>
+    <div *ngIf="isDesigner" class="row">
+      <div class="col-6 bg-primary">
+        <a (click)="isDesigner = true">Designer</a>
+      </div>
+      <div class="col-6">
+        <a (click)="isDesigner = false">Company</a>
+      </div>
+    </div>
+    <div *ngIf="!isDesigner" class="row">
+      <div class="col-6">
+        <a (click)="isDesigner = true">Designer</a>
+      </div>
+      <div class="col-6 bg-primary">
+        <a (click)="isDesigner = false">Company</a>
+      </div>
+    </div>
+    <br>
+    <form *ngIf="isDesigner" (ngSubmit) = "register()" #f="ngForm">
       <input name='username' [(ngModel)]='username' type='text' class='form-control' placeholder='Please Enter A Username'>
       <br/>
-      <p>First Name</p>
       <input name='firstName' [(ngModel)]='firstName' type='text' class='form-control' placeholder='Please Enter Your First Name'>
       <br/>
-      <p>Last Name</p>
       <input name='lastName' [(ngModel)]='lastName' type='text' class='form-control' placeholder='Please Enter Your Last Name'>
       <br/>
-      <p>Password</p>
       <input name='password' [(ngModel)]='password' type='password' class='form-control' placeholder='Please Enter A Password'>
       <br/>
-      <p>Verify Password</p>
       <input name='conf_password' [(ngModel)]='conf_password' type='password' class='form-control' placeholder='Verify Baby!'>
       <br/>
       <br/>
       <button type='submit' class='btn btn-primary btn-block'>Register</button>
     </form>
-    <br/>
-    <form (ngSubmit) = "registerCompany()" #g="ngForm">
-      <input name='username' [(ngModel)]='username' type='text' class='form-control' placeholder='Please Enter A Username'>
+    <form *ngIf="!isDesigner" (ngSubmit) = "registerCompany()" #g="ngForm">
+      <input name='username' [(ngModel)]='username' type='text' class='form-control' placeholder='Please Enter Your Company Name'>
       <br/>
       <input name='firstName' [(ngModel)]='firstName' type='text' class='form-control' placeholder='Please Enter Your First Name'>
       <br/>

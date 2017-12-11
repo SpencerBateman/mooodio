@@ -22,6 +22,7 @@ export class RegisterComponent implements OnInit {
   conf_password: string;
   errorFlag: boolean;
   errorMsg: string;
+  isDesigner: boolean = true;
 
   constructor(private sharedService: SharedService, private userService: UserService, private router: Router) { }
 
