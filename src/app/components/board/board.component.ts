@@ -5,6 +5,7 @@ import { ImageService } from '../../services/image/image.service';
 import { BoardService } from '../../services/board/board.service';
 import {CommentService} from '../../services/comment.service.client';
 import {SharedService} from '../../services/shared.service.client';
+import {UserService} from '../../services/user.service.client';
 declare var jquery:any;
 declare var $ :any;
 
@@ -25,15 +26,19 @@ export class BoardComponent implements OnInit {
   editingComment: boolean;
   commentText: string;
   user: {};
+  collaborator: string;
 
   constructor(private flickrService: FlickrService,
-    private imageService: ImageService,
-    private activatedRoute: ActivatedRoute,
-    private boardService: BoardService,
-    private commentService: CommentService,
-    private sharedService: SharedService) { }
+              private imageService: ImageService,
+              private activatedRoute: ActivatedRoute,
+              private boardService: BoardService,
+              private commentService: CommentService,
+              private sharedService: SharedService,
+              private userService: UserService) {
+  }
 
   ngOnInit() {
+    this.user = this.sharedService.user || {};
     this.isSearching = false;
     this.editingName = false;
     this.activatedRoute.params.subscribe((params: any) => {
@@ -151,7 +156,8 @@ export class BoardComponent implements OnInit {
     if (this.board['public']) {
       return true;
     } else {
-      return this.board['_user'] === this.user['_id'] || this.board['collaborators'].indexOf > 0;
+      return this.board['_user'] === this.user['_id'] || this.board['collaborators'].indexOf(this.user['_id']) >= 0;
     }
   }
 }
+

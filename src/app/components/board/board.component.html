@@ -61,6 +61,7 @@
   <button *ngIf="canView()" (click)="editingComment = true" class="btn btn-secondary btn-block">Comment</button>
   <button *ngIf="canView() && board['public']" (click)="makePrivate()" class="btn btn-secondary btn-block">Make Private</button>
   <button *ngIf="canView() && !board['public']" (click)="makePublic()" class="btn btn-secondary btn-block">Make Public</button>
+  <button *ngIf="canView() && !board['public']" [routerLink]="['/board', boardId, 'addCollaborator']" class="btn btn-secondary btn-block">Add Collaborator</button>
   <button *ngIf="!canView()" [routerLink]="['/profile']" class="btn btn-secondary btn-block">Home</button>
 </div>
 

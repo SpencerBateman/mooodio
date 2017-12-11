@@ -21,6 +21,7 @@ import {CommentService} from './services/comment.service.client';
 import { SearchUsersComponent } from './components/search-users/search-users.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { AdminUserEditComponent } from './components/admin-user-edit/admin-user-edit.component';
+import { CollaboratorSearchComponent } from './components/board/collaborator-search/collaborator-search.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { AdminUserEditComponent } from './components/admin-user-edit/admin-user-
     ViewProfileComponent,
     SearchUsersComponent,
     AdminComponent,
-    AdminUserEditComponent
+    AdminUserEditComponent,
+    CollaboratorSearchComponent
   ],
   imports: [
     BrowserModule,
