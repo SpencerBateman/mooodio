@@ -20,6 +20,7 @@ import { ViewProfileComponent } from './components/user/view-profile/view-profil
 import {CommentService} from './services/comment.service.client';
 import { SearchUsersComponent } from './components/search-users/search-users.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { AdminUserEditComponent } from './components/admin-user-edit/admin-user-edit.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { AdminComponent } from './components/admin/admin.component';
     DraggableDirective,
     ViewProfileComponent,
     SearchUsersComponent,
-    AdminComponent
+    AdminComponent,
+    AdminUserEditComponent
   ],
   imports: [
     BrowserModule,
