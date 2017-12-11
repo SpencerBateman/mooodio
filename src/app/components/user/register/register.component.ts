@@ -41,7 +41,7 @@ export class RegisterComponent implements OnInit {
         } else {
             if (this.password === this.conf_password) {
                 // this.passwordFlag = false;
-                const newUser: User = new User(this.username, this.password, this.firstName, this.lastName, [], []);
+                const newUser: User = new User(this.username, this.password, this.firstName, this.lastName, [], [], 'DESIGNER');
                 this.userService.register(newUser)
                     .subscribe(
                         (data: any) => {
