@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../services/user.service.client';
 import {ActivatedRoute} from '@angular/router';
-import {stringDistance} from 'codelyzer/util/utils';
 import {SharedService} from '../../services/shared.service.client';
 import {BoardService} from '../../services/board/board.service';
 

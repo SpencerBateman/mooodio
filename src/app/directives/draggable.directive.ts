@@ -1,7 +1,7 @@
-import {Directive, ElementRef, EventEmitter, Output} from '@angular/core';
-import {AfterViewInit} from '@angular/core';
+import {AfterViewInit, Directive, ElementRef, EventEmitter, Output} from '@angular/core';
+import {ImageService} from '../services/image/image.service';
+
 declare var $: any;
-import { ImageService } from '../services/image/image.service';
 
 @Directive({
   selector: '[draggable]'

@@ -1,4 +1,4 @@
-import { AngularFourMEANSeedPage } from './app.po';
+import {AngularFourMEANSeedPage} from './app.po';
 
 describe('angular-four-mean-seed App', () => {
   let page: AngularFourMEANSeedPage;

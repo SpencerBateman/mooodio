@@ -1,11 +1,12 @@
-import { Component, OnInit} from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { FlickrService } from '../../services/flickr.service.client';
-import { ImageService } from '../../services/image/image.service';
-import { BoardService } from '../../services/board/board.service';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {FlickrService} from '../../services/flickr.service.client';
+import {ImageService} from '../../services/image/image.service';
+import {BoardService} from '../../services/board/board.service';
 import {CommentService} from '../../services/comment.service.client';
 import {SharedService} from '../../services/shared.service.client';
 import {UserService} from '../../services/user.service.client';
+
 declare var jquery:any;
 declare var $ :any;
 

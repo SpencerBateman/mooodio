@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { CollaboratorSearchComponent } from './collaborator-search.component';
+import {CollaboratorSearchComponent} from './collaborator-search.component';
 
 describe('CollaboratorSearchComponent', () => {
   let component: CollaboratorSearchComponent;

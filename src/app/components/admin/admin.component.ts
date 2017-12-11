@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {SharedService} from '../../services/shared.service.client';
 import {UserService} from '../../services/user.service.client';
 import {BoardService} from '../../services/board/board.service';
 import {User} from '../../models/user.model.client';
-import {Router, RouterOutlet} from '@angular/router';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-admin',

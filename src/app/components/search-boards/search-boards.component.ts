@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {SharedService} from '../../services/shared.service.client';
-import {UserService} from '../../services/user.service.client';
 import {BoardService} from '../../services/board/board.service';
 
 @Component({

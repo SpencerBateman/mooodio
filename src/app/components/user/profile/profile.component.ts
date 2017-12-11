@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../../services/user.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
 import {SharedService} from '../../../services/shared.service.client';
-import { BoardService } from '../../../services/board/board.service';
+import {BoardService} from '../../../services/board/board.service';
 
 @Component({
   selector: 'app-profile',

@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ViewProfileComponent } from './view-profile.component';
+import {ViewProfileComponent} from './view-profile.component';
 
 describe('ViewProfileComponent', () => {
   let component: ViewProfileComponent;

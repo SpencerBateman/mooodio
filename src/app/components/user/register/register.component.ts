@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import { Router } from '@angular/router';
-import { UserService } from '../../../services/user.service.client';
-import { SharedService } from '../../../services/shared.service.client';
+import {Router} from '@angular/router';
+import {UserService} from '../../../services/user.service.client';
+import {SharedService} from '../../../services/shared.service.client';
 import {NgForm} from '@angular/forms';
 import {User} from '../../../models/user.model.client';
 
