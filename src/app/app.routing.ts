@@ -11,6 +11,7 @@ import {SearchUsersComponent} from './components/search-users/search-users.compo
 import {AdminComponent} from './components/admin/admin.component';
 import {AdminUserEditComponent} from './components/admin-user-edit/admin-user-edit.component';
 import {CollaboratorSearchComponent} from './components/board/collaborator-search/collaborator-search.component';
+import {SearchBoardsComponent} from './components/search-boards/search-boards.component';
 
 const APP_ROUTES: Routes = [
   {path: '', component: HomeComponent},
@@ -22,7 +23,8 @@ const APP_ROUTES: Routes = [
   {path: 'board/:boardId/addCollaborator', component: CollaboratorSearchComponent},
   {path: 'profile', component: ProfileComponent, canActivate: [AuthenticationService]},
   {path: 'profile/:viewedUserId', component: ViewProfileComponent},
-  {path: 'searchUsers', component: SearchUsersComponent}
+  {path: 'searchUsers', component: SearchUsersComponent},
+  {path: 'searchBoards', component: SearchBoardsComponent}
 ];
 
 // Export the routes as module providers

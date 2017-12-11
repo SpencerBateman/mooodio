@@ -1,0 +1,46 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <!--heading on the nav bar-->
+    <p class="navbar-header pull-left">
+      <a class="navbar-brand thick">
+        <b>Profile</b>
+      </a>
+    </p>
+    <!--tick mark-->
+    <p class="navbar-text pull-right">
+      <a (click)="updateProfile()" class="navbar-link">
+        <span class="glyphicon glyphicon-ok"></span>
+      </a>
+    </p>
+  </div>
+</nav>
+<div class="container">
+  <div class="row">
+    <label for="searchTerm">Find a Board by Name:</label>
+    <input id='searchTerm' name='searchTerm' [(ngModel)]='searchTerm' type='text' class='form-control' placeholder='Please Enter A Board Name'>
+    <button (click)="searchBoards()" class="btn btn-primary btn-block">Search</button>
+  </div>
+
+  <ul class="list-group">
+    <li *ngFor="let board of boards" class="list-group-item">
+      <div class="row">
+        <div class="col-12">
+          <a [routerLink]="['/board', board['_id']]">
+            {{board['name']}}
+          </a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<!-- Footer -->
+<nav class="navbar navbar-default navbar-fixed-bottom">
+  <div class="container-fluid">
+    <p class="navbar-text pull-right">
+      <a [routerLink]="['/profile']">
+        <span class="glyphicon glyphicon-user"></span>
+      </a>
+    </p>
+  </div>
+</nav>
