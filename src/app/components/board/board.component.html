@@ -26,7 +26,7 @@
       </div>
     </div>
   </div>
-  <div class='board' id='board'>
+  <div *ngIf="canView()" class='board' id='board'>
     <div class='board__name'>
       <input *ngIf="editingName" [(ngModel)]="board['name']">
       <h2 class='board__name--h2' *ngIf="!editingName" (click)="editName()">{{board['name']}}</h2>
@@ -39,7 +39,10 @@
       <img src={{photo.url}}>
     </div>
   </div>
-  <button (click)="enableOverlay()" class='btn btn-primary btn-block'>Search Flickr</button>
+  <div *ngIf="!canView()" class="board container">
+    <div class="row">Sorry, you don't have permission to view this board.</div>
+  </div>
+  <button *ngIf="canView()" (click)="enableOverlay()" class='btn btn-primary btn-block'>Search Flickr</button>
   <div class="mooodio-comment-container container-fluid">
     <div *ngFor="let comment of comments" class="row">
       <!--<span>{{comment['authorName']}}</span>-->
@@ -55,6 +58,9 @@
     placeholder="Write a comment">
     <button (click)="createComment()" class="btn btn-block">Submit</button>
   </div>
-  <button (click)="editingComment = true" class="btn btn-secondary btn-block">Comment</button>
+  <button *ngIf="canView()" (click)="editingComment = true" class="btn btn-secondary btn-block">Comment</button>
+  <button *ngIf="canView() && board['public']" (click)="makePrivate()" class="btn btn-secondary btn-block">Make Private</button>
+  <button *ngIf="canView() && !board['public']" (click)="makePublic()" class="btn btn-secondary btn-block">Make Public</button>
+  <button *ngIf="!canView()" [routerLink]="['/profile']" class="btn btn-secondary btn-block">Home</button>
 </div>
 

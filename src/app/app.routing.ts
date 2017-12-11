@@ -13,8 +13,8 @@ import {AdminUserEditComponent} from './components/admin-user-edit/admin-user-ed
 
 const APP_ROUTES: Routes = [
   {path: '', component: HomeComponent},
-  {path: 'admin', component: AdminComponent},
-  {path: 'adminEdit/:viewedUserId', component: AdminUserEditComponent},
+  {path: 'admin', component: AdminComponent, canActivate: [AuthenticationService]},
+  {path: 'adminEdit/:viewedUserId', component: AdminUserEditComponent, canActivate: [AuthenticationService]},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'board/:boardId', component: BoardComponent},

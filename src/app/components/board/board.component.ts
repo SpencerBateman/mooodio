@@ -132,4 +132,26 @@ export class BoardComponent implements OnInit {
       });
     });
   }
+
+  makePrivate() {
+    this.board['public'] = false;
+    this.boardService.updateBoard(this.boardId, this.board).subscribe((res: any) => {
+      // Keep in case we want to do something
+    });
+  }
+
+  makePublic() {
+    this.board['public'] = true;
+    this.boardService.updateBoard(this.boardId, this.board).subscribe((res: any) => {
+      // Keep in case we want to do something
+    });
+  }
+
+  canView() {
+    if (this.board['public']) {
+      return true;
+    } else {
+      return this.board['_user'] === this.user['_id'] || this.board['collaborators'].indexOf > 0;
+    }
+  }
 }
