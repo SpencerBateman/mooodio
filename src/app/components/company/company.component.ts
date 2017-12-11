@@ -1,15 +1,15 @@
-import {Component, OnInit} from '@angular/core';
-import {UserService} from '../../../services/user.service.client';
+import { Component, OnInit } from '@angular/core';
+import {BoardService} from '../../services/board/board.service';
+import {SharedService} from '../../services/shared.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
-import {SharedService} from '../../../services/shared.service.client';
-import { BoardService } from '../../../services/board/board.service';
+import {UserService} from '../../services/user.service.client';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  selector: 'app-company',
+  templateUrl: './company.component.html',
+  styleUrls: ['./company.component.css']
 })
-export class ProfileComponent implements OnInit {
+export class CompanyComponent implements OnInit {
 
   // properties
   userId: string;
@@ -18,7 +18,6 @@ export class ProfileComponent implements OnInit {
   following: any[];
   followers: any[];
   isEditingProfile: boolean;
-  designers: any[];
 
   constructor(
     private userService: UserService,
@@ -50,12 +49,6 @@ export class ProfileComponent implements OnInit {
               this.followers.push(res);
             });
           }
-          this.designers = [];
-          for (let i = 0; i < this.user['designers'].length ; i++) {
-            this.userService.findUserById(this.user['designers'][i]).subscribe((res: any) => {
-              this.designers.push(res);
-            });
-          }
         }
       );
   }
@@ -70,14 +63,6 @@ export class ProfileComponent implements OnInit {
     this.isEditingProfile = true;
   }
 
-  createBoardAndNavigate() {
-    this.userService.updateUser(this.userId, this.user).subscribe((data: any) => {
-      this.boardService.createBoard(this.userId).subscribe((board) => {
-        this.router.navigate(['/board/' + board._id]);
-      });
-    });
-  }
-
   logout() {
     this.userService.logout()
       .subscribe(
@@ -86,15 +71,4 @@ export class ProfileComponent implements OnInit {
         }
       );
   }
-
-  deleteBoard(board) {
-    console.log('trying to delete');
-    this.boardService.deleteBoard(board._id).subscribe(() => {
-      this.boardService.findBoardsByUser(this.userId).subscribe((boards) => {
-        this.boards = boards;
-      });
-    });
-  }
-
 }
-

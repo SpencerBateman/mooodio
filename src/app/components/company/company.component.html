@@ -1,0 +1,42 @@
+<nav class="navbar navbar-default">
+  <div class="navbar-header">
+    <img [routerLink]="['/profile']" class='navbar-image' src='/assets/images/logo.png'>
+  </div>
+</nav>
+<hr/>
+
+<div class="container">
+
+  <div class="container">
+    <div class="row">
+      <h1>{{user?.username}}</h1>
+    </div>
+    <div class="row">
+      <h2>{{user?.firstName}} {{user?.lastName}}</h2>
+    </div>
+  </div>
+
+  <br/>
+
+  <div class="row">
+    <h2 class='col-10'>Designers</h2>
+  </div>
+  <hr/>
+  <ul class="container">
+    <li class='board__preview' *ngFor="let designer of designers" >
+      <h3 [routerLink]="['/profile/', designer['_id']]">{{designer['name']}}</h3>
+    </li>
+  </ul>
+  <hr/>
+</div>
+
+<!-- Footer -->
+<nav class="navbar navbar-default navbar-fixed-bottom">
+  <div class="container-fluid">
+    <p class="navbar-text pull-right">
+      <a [routerLink]="['/profile']">
+        <span class="glyphicon glyphicon-user"></span>
+      </a>
+    </p>
+  </div>
+</nav>
