@@ -7,6 +7,7 @@ module.exports = function(app) {
   passport.deserializeUser(deserializeUser);
 
 
+  app.post('/zack/slack', slackBot);
   app.get('/api/user/search', searchUsers);
   app.post('/api/login', passport.authenticate('local'), login);
   app.post('/api/loggedIn', loggedIn);
@@ -18,6 +19,10 @@ module.exports = function(app) {
   app.put('/api/user/:userId', updateUser);
   app.post('/api/user', createUser);
   app.delete('/api/user/:userId', deleteUser);
+
+  function slackBot(req, res) {
+    res.send("IT WORKS!")
+  }
 
   let LocalStrategy = require('passport-local').Strategy;
   passport.use(new LocalStrategy(localStrategy));
