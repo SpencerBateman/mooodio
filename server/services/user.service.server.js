@@ -2,12 +2,14 @@ module.exports = function(app) {
   let userModel = require('../model/user/user.model.server');
   let passport = require('passport');
   let bcrypt = require("bcrypt-nodejs");
+  let request = require('superagent');
 
   passport.serializeUser(serializeUser);
   passport.deserializeUser(deserializeUser);
 
 
-  app.post('/zack/slack', slackBot);
+  app.post('/zack/slack/slash', slackBotSlash);
+  app.post('/zack/slack/button', slackBotButton);
   app.get('/api/user/search', searchUsers);
   app.post('/api/login', passport.authenticate('local'), login);
   app.post('/api/loggedIn', loggedIn);
@@ -20,8 +22,115 @@ module.exports = function(app) {
   app.post('/api/user', createUser);
   app.delete('/api/user/:userId', deleteUser);
 
-  function slackBot(req, res) {
-    res.send("IT WORKS!")
+  let answerMap = {};
+
+  function slackBotSlash(req, res) {
+    answerMap = {
+      "heart": 0,
+      "hug": 0,
+      "thumb": 0
+    };
+    res.json({
+      "response_type": "in_channel",
+      "text": "Oh no, someone feels lost!",
+      "attachments": [
+        {
+          "text": "Go find them!",
+          "callback_id": "lost_found",
+          "color": "#e3e010",
+          "attachment_type": "default",
+          "actions": [
+            {
+              "name": "lost",
+              "text": ":heart:",
+              "type": "button",
+              "value": "heart"
+            },
+            {
+              "name": "lost",
+              "text": 0,
+              "type": "button"
+            },
+            {
+              "name": "lost",
+              "text": ":hugging_face:",
+              "type": "button",
+              "value": "hug"
+            },
+            {
+              "name": "lost",
+              "text": 0,
+              "type": "button"
+            },
+            {
+              "name": "lost",
+              "text": ":+1:",
+              "type": "button",
+              "value": "thumb"
+            },
+            {
+              "name": "lost",
+              "text": 0,
+              "type": "button"
+            }
+          ]
+        }
+      ]
+    });
+  }
+
+  function slackBotButton(req, res) {
+    const value = req.body.actions.value;
+    answerMap[value] = answerMap[value] + 1;
+    let responseJson = {
+      "response_type": "in_channel",
+      "text": "Oh no, someone feels lost!",
+      "message_ts": req.body.message_ts,
+      "attachments": [
+        {
+          "text": "Go find them!",
+          "callback_id": "lost_found",
+          "color": "#3AA3E3",
+          "attachment_type": "default",
+          "actions": [
+            {
+              "name": "lost",
+              "text": ":heart:",
+              "type": "button",
+              "value": "heart"
+            },
+            {
+              "name": "lost",
+              "text": answerMap['heart'],
+              "type": "button"
+            },
+            {
+              "name": "lost",
+              "text": ":hugging_face:",
+              "type": "button",
+              "value": "hug"
+            },
+            {
+              "name": "lost",
+              "text": answerMap['hug'],
+              "type": "button"
+            },
+            {
+              "name": "lost",
+              "text": ":+1:",
+              "type": "button",
+              "value": "thumb"
+            },
+            {
+              "name": "lost",
+              "text": answerMap['thumb'],
+              "type": "button"
+            }
+          ]
+        }
+      ]
+    };
+    res.json(responseJson);
   }
 
   let LocalStrategy = require('passport-local').Strategy;
@@ -69,15 +178,15 @@ module.exports = function(app) {
 
   function deserializeUser(user, done) {
     userModel
-      .findUserById(user._id)
-      .then(
-        function(user){
-          done(null, user);
-        },
-        function(err){
-          done(err, null);
-        }
-      );
+    .findUserById(user._id)
+    .then(
+    function(user){
+      done(null, user);
+    },
+    function(err){
+      done(err, null);
+    }
+    );
   }
 
   function updateUser(req, res) {
@@ -99,20 +208,20 @@ module.exports = function(app) {
     var userId  = req.params['userId'];
 
     userModel
-      .findUserById(userId)
-      .then(function(user) {
-        res.json(user);
-      });
+    .findUserById(userId)
+    .then(function(user) {
+      res.json(user);
+    });
   }
 
   function createUser(req, res) {
     var user = req.body;
 
     userModel
-      .createUser(user)
-      .then(function(user) {
-        res.json(user);
-      });
+    .createUser(user)
+    .then(function(user) {
+      res.json(user);
+    });
   };
 
   function findAllUser(req, res) {
@@ -121,16 +230,16 @@ module.exports = function(app) {
 
     if (username && password) {
       userModel
-        .findUserByCredentials(username, password)
-        .then(function(user) {
-          res.json(user);
-        });
+      .findUserByCredentials(username, password)
+      .then(function(user) {
+        res.json(user);
+      });
     } else if (username) {
       userModel
-        .findUserByUsername(username)
-        .then(function(user) {
-          res.json(user);
-        });
+      .findUserByUsername(username)
+      .then(function(user) {
+        res.json(user);
+      });
       return;
     }
   }
