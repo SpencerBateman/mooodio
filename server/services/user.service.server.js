@@ -2,7 +2,6 @@ module.exports = function(app) {
   let userModel = require('../model/user/user.model.server');
   let passport = require('passport');
   let bcrypt = require("bcrypt-nodejs");
-  let request = require('superagent');
 
   passport.serializeUser(serializeUser);
   passport.deserializeUser(deserializeUser);
