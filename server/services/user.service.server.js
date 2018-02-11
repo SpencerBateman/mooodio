@@ -79,6 +79,7 @@ module.exports = function(app) {
   }
 
   function slackBotButton(req, res) {
+    console.log(req.body);
     const value = req.body.actions[0].value;
     answerMap[value] = answerMap[value] + 1;
     let responseJson = {
