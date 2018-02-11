@@ -79,6 +79,7 @@ module.exports = function(app) {
   }
 
   function slackBotButton(req, res) {
+    console.log(req.body);
     const value = req.body.actions.value;
     answerMap[value] = answerMap[value] + 1;
     let responseJson = {
@@ -89,7 +90,7 @@ module.exports = function(app) {
         {
           "text": "Go find them!",
           "callback_id": "lost_found",
-          "color": "#3AA3E3",
+          "color": "#e3e010",
           "attachment_type": "default",
           "actions": [
             {
